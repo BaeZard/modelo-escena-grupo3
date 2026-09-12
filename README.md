@@ -4,7 +4,7 @@ Este proyecto consiste en el modelado y renderizado 2D/3D de la escena de un pas
 
 ## 🖼️ Imagen referencial del proyecto
 
-![Escena Referencial](<imagen referencial/referencial.jpeg>)
+![Escena Referencial](<imagen referencial/referencial_final.jpeg>)
 
 ---
 
