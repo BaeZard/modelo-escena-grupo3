@@ -10,8 +10,12 @@ Este proyecto consiste en el modelado y renderizado 2D de la escena un consultor
 
 ## 📌 Avance General Actual
 
+
+![Escena Avance](<AVANCE/11-09-26_AVANCE.png>)
+
+---
+
 Hasta el momento se tiene montada la estructura principal del consultorio usando figuras básicas y transformaciones simples:
-![Escena Avance](<imagen referencial/referencia_final.jpeg>)
 
 * **Escenario Base:**
   * Fondo azul para la pared y un bloque para el suelo.
