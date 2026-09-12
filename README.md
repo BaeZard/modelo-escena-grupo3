@@ -1,10 +1,10 @@
-Este proyecto consiste en el modelado y renderizado 2D/3D de la escena de un pasillo institucional utilizando **C++**, **OpenGL** y **FreeGLUT**.
+Este proyecto consiste en el modelado y renderizado 2D de la escena un consultorio o laboratorio médico moderno **C++**, **OpenGL** y **FreeGLUT**.
 
 ---
 
 ## 🖼️ Imagen referencial del proyecto
 
-![Escena Referencial](<imagen referencial/referencial_final.jpeg>)
+![Escena Referencial](<imagen referencial/referencia_final.jpeg>)
 
 ---
 
