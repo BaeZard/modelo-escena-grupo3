@@ -56,6 +56,8 @@ void maceta(void);
 void figura_sombra_triangulo_frontal(void);
 void figura_sombra_cuadrilatero_fondo(void);
 void figura_sombra_cuadrilatero_central(void);
+
+//display
 void display(){
 //----
 glClear (GL_COLOR_BUFFER_BIT);
@@ -85,7 +87,11 @@ glPushMatrix(); glTranslatef (145.0f, 0.0f, 0.0f); puerta (1.0f); glPopMatrix();
 //CUADRO
 cuadro();
 //CUADRO TRANSLATE
-glPushMatrix(); glRotatef (180, 0.0f, 1.0f, 0.0f); glTranslatef(-44.0f, 20.0f, 0.0f); cuadro(); glPopMatrix();
+glPushMatrix(); 
+glRotatef (180, 0.0f, 1.0f, 0.0f); 
+glTranslatef(-44.0f, 20.0f, 0.0f); 
+cuadro(); 
+glPopMatrix();
 //PUERTAS INVERTIDAS CON OPACIDAD 0.2f
 glPushMatrix(); glRotatef (180, 1.0f, 0.0f, 0.0f); glTranslatef(0.0f, 136.0f, 0.0f); puerta (0.2);
 glTranslatef(145.0f, 0.0f, 0.0f); puerta(0.2); glPopMatrix();
