@@ -4,28 +4,44 @@
 //Declaracion de Funciones
 //EJES
 void ejes(void);
-//PARED FRONTAL
+//PISO
 void piso(void);
+//CAMA
 void cama(void);
+//COLCHON
 void colchon(void);
+//PUERTA
 void puerta(void);
+//PARED IZQUIERDA
 void paredIzquierda(void);
+//PARED DERECHA
 void paredDerecha(void);
+//MESITA
 void mesita(void);
+//ESCRITORIO
 void escritorio(void);
+//PATAS ESCRITORIO
 void patasEscritorio(void);
+//VENTANA
 void ventana(void);
+//ALFOMBRA
 void alfombra(void);
+//TACHO
 void tacho(void);
+//PC ENCIMA DE ESCRITORIO
 void pc(void);
+//MESA DE NOCHE
 void mesaNoche(void);
-void sombra_triangular_ventana(void);
+//REPISA
+void repisa(void);
+//LAMPARA
+void lampara(void);
+
 
 void inicializar()
 {
 	//fondo verde
     glClearColor(0.82f, 0.88f, 0.60f, 1.0f);
-    //glColor3f(0.82f, 0.88f, 0.60f);
     //glEnable(GL_DEPTH_TEST);
 
     glMatrixMode(GL_PROJECTION);
@@ -59,20 +75,26 @@ void dibujar()
 	paredDerecha();
 	glPopMatrix();
 
-	// PUERTA
+	//PUERTA
     glPushMatrix();
 	glScalef(0.8f, 0.8f, 1.0f);
 	puerta();
 	glPopMatrix();
 
-	// Mesita
+	//Repisa en la pared
+    glPushMatrix();
+    glScalef(0.8f, 0.8f, 1.0f);
+    repisa();
+    glPopMatrix();
+    
+	//Mesita
 	glPushMatrix();
 	glTranslatef(25.0f, -10.0f, 0.0f);
 	glScalef(0.8f, 0.8f, 1.0f);
 	mesita();
 	glPopMatrix();
 	
-	// Alfombra
+	//Alfombra
 	glPushMatrix();
 	glTranslatef(-13.0f, -22.0f, 0.0f);
 	glScalef(1.8f, 1.8f, 1.0f);
@@ -113,7 +135,13 @@ void dibujar()
 	escritorio();
 	glPopMatrix();
 	
+	//Tacho
+	glPushMatrix();
+	glTranslatef(-20.0f, 7.0f, 0.0f);
+	glScalef(0.7f, 0.8f, 1.0f);
 	tacho();
+	glPopMatrix();
+
 	
 	//PC de Escritorio
 	glPushMatrix();
@@ -122,7 +150,6 @@ void dibujar()
 	pc();
 	glPopMatrix();
 
-	
 	//Ventana
 	glPushMatrix();
 	ventana();
@@ -135,7 +162,6 @@ void dibujar()
 	mesaNoche();
 	glPopMatrix();
 
-	
 	//Cama
 	glPushMatrix();
 	glTranslatef(23.0f, -37.0f, 0.0f);
@@ -150,6 +176,12 @@ void dibujar()
 	colchon();
 	glPopMatrix();
 
+	//Lámpara
+	glPushMatrix();
+	glTranslatef(38.0f, 20.0f,0.0f);
+	glScalef(0.8f,0.8f,1.0f);
+	lampara();
+	glPopMatrix();
 	
     glutSwapBuffers();
 }
@@ -256,17 +288,14 @@ void piso()
 	glVertex2f(-20,-82);
 	glVertex2f(-13,-88);
 	
-	glVertex2f(-20,-82);
-	glVertex2f(-13,-88);
-	
 	glVertex2f(-3,-97);
-	glVertex2f(-9,-92);
+	glVertex2f(-8,-93);
 	
-	glVertex2f(-20,-82);
-	glVertex2f(-13,-88);
+	glVertex2f(7,-109);
+	glVertex2f(1,-104);
 	
-	glVertex2f(-20,-82);
-	glVertex2f(-13,-88);
+	glVertex2f(15,-117.5);
+	glVertex2f(11,-114);
 	
 	glEnd();
 }
@@ -414,21 +443,22 @@ void mesita()
 
     glBegin(GL_POLYGON);
 
-        glVertex2f(-61,-48);
-        glVertex2f(-56,-45);
-        glVertex2f(-53,-49);
-        glVertex2f(-58,-52);
-
+         glVertex2f(-72,-35);
+	    glVertex2f(-66,-30);
+	    glVertex2f(-62,-34);
+	    glVertex2f(-68,-39);
+    
     glEnd();
 
     glBegin(GL_POLYGON);
 
-        glVertex2f(-57,-51);
-        glVertex2f(-52,-48);
-        glVertex2f(-49,-52);
-        glVertex2f(-54,-55);
+        glVertex2f(-65,-37);
+	    glVertex2f(-59,-32);
+	    glVertex2f(-55,-36);
+	    glVertex2f(-61,-41);
 
     glEnd();
+    
 }
 
 //Ventana
@@ -595,7 +625,7 @@ void pc(){
     
 }
 
-// Patas de escritorio
+//PATAS DE ESCRITORIO
 void patasEscritorio(){
 	
     glColor3f(0.25f, 0.25f, 0.25f);
@@ -740,7 +770,7 @@ void colchon(){
 	
 }
 
-//Alfombra
+//ALFOMBRA
 void alfombra(){
 	glColor3f(0.88f, 0.45f, 0.32f);
 
@@ -754,11 +784,119 @@ void alfombra(){
     glEnd();
 }
 
-void tacho(){
-    
+//TACHO
+void tacho()
+{
+    // Cara superior
+    glColor3f(0.35f, 0.35f, 0.35f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0,0);
+        glVertex2f(5,4);
+        glVertex2f(10,0);
+        glVertex2f(5,-4);
+
+    glEnd();
+
+    // Cara frontal
+    glColor3f(0.20f, 0.20f, 0.20f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(5,-4);
+        glVertex2f(10,0);
+        glVertex2f(10,-12);
+        glVertex2f(5,-16);
+
+    glEnd();
+
+    // Cara lateral
+    glColor3f(0.12f, 0.12f, 0.12f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0,0);
+        glVertex2f(5,-4);
+        glVertex2f(5,-16);
+        glVertex2f(0,-12);
+
+    glEnd();
+
+    // Papeles
+    glColor3f(1.0f, 1.0f, 1.0f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(3,1);
+        glVertex2f(4,3);
+        glVertex2f(6,2);
+        glVertex2f(5,0);
+
+    glEnd();
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(5,2);
+        glVertex2f(6,4);
+        glVertex2f(7,3);
+        glVertex2f(6,1);
+
+    glEnd();
+}
+
+//LAMPARA
+void lampara()
+{
+    //BASE
+    glColor3f(0.85f,0.85f,0.85f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0,0);
+        glVertex2f(3,2);
+        glVertex2f(6,0);
+        glVertex2f(3,-2);
+
+    glEnd();
+
+    //POSTE
+    glColor3f(0.70f,0.70f,0.70f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(2.5f,0);
+        glVertex2f(3.5f,0);
+        glVertex2f(3.5f,10);
+        glVertex2f(2.5f,10);
+
+    glEnd();
+
+    // PANTALLA
+	glColor3f(0.95f,0.85f,0.60f);
+	glBegin(GL_POLYGON);
+	
+	    glVertex2f(-2,10);
+	    glVertex2f(8,10);
+	    glVertex2f(6,16);
+	    glVertex2f(0,16);
+	
+	glEnd();
+
+    //SOMBRA DE LA PANTALLA
+	glColor3f(0.80f,0.70f,0.50f);
+	glBegin(GL_POLYGON);
+	
+	    glVertex2f(8,10);
+	    glVertex2f(6,16);
+	    glVertex2f(5,15);
+	    glVertex2f(7,10);
+	
+	glEnd();
 
 }
 
+//MESA DE NOCHE
 void mesaNoche()
 {
     // TAPA SUPERIOR
@@ -797,5 +935,104 @@ void mesaNoche()
 
     glEnd();
 
+	//Linea divisora cajon
+	glColor3f(0.22f, 0.07f, 0.04f);
+
+	glBegin(GL_LINES);
+	
+	    glVertex2f(1,-9);
+	    glVertex2f(8,-14);
+	
+	glEnd();
+	
+	//Pestillo superior
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glLineWidth(2);
+	
+	glBegin(GL_LINES);
+	
+	    glVertex2f(4,-7);
+	    glVertex2f(6,-8);
+	
+	glEnd();
+
+	// Pestillo inferior
+	glBegin(GL_LINES);
+	
+	    glVertex2f(4,-16);
+	    glVertex2f(6,-17);
+	
+	glEnd();
     
 }
+
+//Repisa
+void repisa()
+{
+    //SOMBRA PROYECTADA EN LA PARED
+    glColor3f(0.68f, 0.67f, 0.58f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-32, 63);
+        glVertex2f(20, 84);
+        glVertex2f(38, 78);
+        glVertex2f(38, 82);
+        glVertex2f(20, 89);
+        glVertex2f(-32, 68);
+    glEnd();
+
+    //SOPORTES DE MADERA
+    glColor3f(0.50f, 0.22f, 0.10f);
+
+    //Soporte Izquierdo
+    glBegin(GL_TRIANGLES);
+        glVertex2f(-22, 72);
+        glVertex2f(-17, 74.0f);
+        glVertex2f(-22, 65);
+    glEnd();
+
+    //Soporte Derecho
+    glBegin(GL_TRIANGLES);
+        glVertex2f(28, 84);
+        glVertex2f(34, 82.5f);
+        glVertex2f(32, 78);
+    glEnd();
+
+    //TABLA SUPERIOR
+    glColor3f(0.82f, 0.52f, 0.32f);
+
+    //Tramo Pared Izquierda
+    glBegin(GL_POLYGON);
+        glVertex2f(-31, 76);
+        glVertex2f(20, 97);
+        glVertex2f(20, 91);
+        glVertex2f(-22, 72);
+    glEnd();
+
+    //Tramo Pared Derecha
+    glBegin(GL_POLYGON);
+        glVertex2f(20, 97);
+        glVertex2f(36, 88);
+        glVertex2f(32, 80);
+        glVertex2f(20, 91);
+    glEnd();
+
+    //CANTO FRONTAL Y GROSOR
+    glColor3f(0.60f, 0.32f, 0.18f);
+
+    // Canto tramo izquierdo
+    glBegin(GL_POLYGON);
+        glVertex2f(-22, 72);
+        glVertex2f(20, 91);
+        glVertex2f(20, 88);
+        glVertex2f(-22, 69);
+    glEnd();
+
+    //Canto tramo derecho
+    glBegin(GL_POLYGON);
+        glVertex2f(20, 91);
+        glVertex2f(32, 83);
+        glVertex2f(32, 80);
+        glVertex2f(20, 88);
+    glEnd();
+}
+
