@@ -20,6 +20,7 @@ void tacho(void);
 void pc(void);
 void mesaNoche(void);
 void sombra_triangular_ventana(void);
+void espejo(void);
 
 void inicializar()
 {
@@ -149,7 +150,12 @@ void dibujar()
 	glScalef(1.6f, 1.5f, 1.0f);
 	colchon();
 	glPopMatrix();
-
+	
+	// Espejo
+    glPushMatrix();
+	glScalef(0.8f, 0.8f, 1.0f);
+	espejo();
+	glPopMatrix();
 	
     glutSwapBuffers();
 }
@@ -798,4 +804,37 @@ void mesaNoche()
     glEnd();
 
     
+}
+
+//Espejo (detalle agregado)
+void espejo()
+{
+    // Marco de madera
+    glColor3f(0.35f, 0.22f, 0.12f);
+
+    glBegin(GL_POLYGON);
+        glVertex2f(11,65);
+        glVertex2f(19,73);
+        glVertex2f(17,100);
+        glVertex2f(9,92);
+    glEnd();
+
+    // Superficie reflejante
+    glColor3f(0.80f, 0.87f, 0.93f);
+
+    glBegin(GL_POLYGON);
+        glVertex2f(12,68);
+        glVertex2f(17,74.5);
+        glVertex2f(15.5,96);
+        glVertex2f(10.5,89);
+    glEnd();
+
+    // Brillo diagonal del vidrio
+    glColor3f(0.95f, 0.98f, 1.0f);
+    glLineWidth(2);
+
+    glBegin(GL_LINES);
+        glVertex2f(13,71);
+        glVertex2f(14.5,93);
+    glEnd();
 }
