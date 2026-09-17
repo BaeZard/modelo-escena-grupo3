@@ -15,12 +15,20 @@ void mesita(void);
 void escritorio(void);
 void patasEscritorio(void);
 void ventana(void);
+//CARLOS
+void apliquePared(void);
 void alfombra(void);
 void tacho(void);
 void pc(void);
 void mesaNoche(void);
 void sombra_triangular_ventana(void);
-void espejo(void);
+//CARLOS
+void cuadroPared(void);
+//CARLOS
+void cortina(void);
+//CARLOS
+void jardinera(void);
+
 
 void inicializar()
 {
@@ -123,11 +131,37 @@ void dibujar()
 	pc();
 	glPopMatrix();
 
+
 	
 	//Ventana
 	glPushMatrix();
 	ventana();
 	glPopMatrix();
+
+	//CARLOS
+	//Aplique de luz a la derecha de la ventana (reubicado: ya no se encima con el cuadro blanco)
+	glPushMatrix();
+	apliquePared();
+	glPopMatrix();
+	
+	//CARLOS
+	//Jardinera colgante debajo de la ventana (reubicada y reducida: ya no queda tapada por la mesa de noche)
+	glPushMatrix();
+	jardinera();
+	glPopMatrix();
+	
+	//CARLOS
+	//Cortina a la izquierda de la ventana
+	glPushMatrix();
+	cortina();
+	glPopMatrix();
+	
+	//CARLOS
+	//Cuadro pequeño sobre la ventana
+	glPushMatrix();
+	cuadroPared();
+	glPopMatrix();
+	
 	
 	//Mesa de Noche
 	glPushMatrix();
@@ -151,11 +185,8 @@ void dibujar()
 	colchon();
 	glPopMatrix();
 	
-	// Espejo
-    glPushMatrix();
-	glScalef(0.8f, 0.8f, 1.0f);
-	espejo();
-	glPopMatrix();
+	
+
 	
     glutSwapBuffers();
 }
@@ -499,6 +530,187 @@ void ventana()
     glEnd();
 }
 
+//CARLOS
+void apliquePared()
+{
+    // Base metálica
+    glColor3f(0.30f, 0.30f, 0.32f);
+    glBegin(GL_POLYGON);
+        glVertex2f(49,73);
+        glVertex2f(51,74);
+        glVertex2f(51,78);
+        glVertex2f(49,77);
+    glEnd();
+
+    // Pantalla de luz
+    glColor3f(0.95f, 0.90f, 0.70f);
+    glBegin(GL_POLYGON);
+        glVertex2f(52,72);
+        glVertex2f(54,73.5);
+        glVertex2f(55,76);
+        glVertex2f(54,78.5);
+        glVertex2f(52,80);
+        glVertex2f(50.5,78.5);
+        glVertex2f(50,76);
+        glVertex2f(50.5,73.5);
+    glEnd();
+
+    // Brillo central
+    glColor3f(1.0f,1.0f,0.85f);
+    glPointSize(6);
+    glBegin(GL_POINTS);
+        glVertex2f(52.5,76);
+    glEnd();
+}
+
+//CARLOS
+void cortina()
+{
+
+    glColor3f(0.75f, 0.20f, 0.25f);
+
+    glBegin(GL_POLYGON);
+
+        // Parte inferior
+        glVertex2f(25, 34);
+        glVertex2f(38, 26);
+
+        // Parte superior
+        glVertex2f(37, 78);
+        glVertex2f(24, 86);
+
+    glEnd();
+
+    glColor3f(0.58f, 0.13f, 0.16f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(30, 31);
+        glVertex2f(33, 29);
+
+        glVertex2f(32, 81);
+        glVertex2f(29, 82);
+
+    glEnd();
+
+    glColor3f(0.82f, 0.25f, 0.30f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(25.5f, 35);
+        glVertex2f(30, 32);
+
+        glVertex2f(29, 82);
+        glVertex2f(25, 85);
+
+    glEnd();
+
+
+    glColor3f(0.35f, 0.25f, 0.15f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(23, 85);
+        glVertex2f(38, 77);
+
+        glVertex2f(38, 81);
+        glVertex2f(23, 89);
+
+    glEnd();
+}
+
+//CARLOS
+void cuadroPared()
+{
+
+    glColor3f(0.30f, 0.20f, 0.12f);
+
+    glBegin(GL_POLYGON);
+        glVertex2f(35, 78);   // inferior izquierdo
+        glVertex2f(47, 71);   // inferior derecho
+        glVertex2f(46, 84);   // superior derecho
+        glVertex2f(34, 91);   // superior izquierdo
+    glEnd();
+
+    glColor3f(0.95f, 0.92f, 0.85f);
+
+    glBegin(GL_POLYGON);
+        glVertex2f(36.5f, 79.0f);
+        glVertex2f(45.2f, 73.8f);
+        glVertex2f(44.4f, 82.2f);
+        glVertex2f(35.7f, 87.5f);
+    glEnd();
+
+    glColor3f(0.55f, 0.60f, 0.45f);
+
+    glBegin(GL_TRIANGLES);
+        glVertex2f(37.2f, 80.0f);
+        glVertex2f(40.2f, 78.5f);
+        glVertex2f(38.5f, 82.7f);
+    glEnd();
+
+
+    glColor3f(0.45f, 0.50f, 0.38f);
+
+    glBegin(GL_TRIANGLES);
+        glVertex2f(39.0f, 79.0f);
+        glVertex2f(42.5f, 76.8f);
+        glVertex2f(41.0f, 81.5f);
+    glEnd();
+
+
+    glColor3f(0.90f, 0.75f, 0.30f);
+
+    glPointSize(5);
+
+    glBegin(GL_POINTS);
+        glVertex2f(42.8f, 81.0f);
+    glEnd();
+}
+
+//CARLOS
+void jardinera()
+{
+    // Caja
+    glColor3f(0.40f, 0.22f, 0.12f);
+    glBegin(GL_POLYGON);
+        glVertex2f(41,37);
+        glVertex2f(53,29.5);
+        glVertex2f(53,26.5);
+        glVertex2f(41,34);
+    glEnd();
+
+    // Tierra
+    glColor3f(0.28f, 0.16f, 0.09f);
+    glBegin(GL_POLYGON);
+        glVertex2f(41,37);
+        glVertex2f(53,29.5);
+        glVertex2f(52.3,31.3);
+        glVertex2f(41.7,38.6);
+    glEnd();
+
+    // Florcitas
+    glPointSize(6);
+    glColor3f(0.95f, 0.40f, 0.55f);
+    glBegin(GL_POINTS); glVertex2f(44,36.2); glEnd();
+    glColor3f(0.95f, 0.85f, 0.30f);
+    glBegin(GL_POINTS); glVertex2f(47.5,34.2); glEnd();
+    glColor3f(0.85f, 0.40f, 0.90f);
+    glBegin(GL_POINTS); glVertex2f(51,32); glEnd();
+    
+    // Tallos de las flores
+    glColor3f(0.45f, 0.70f, 0.30f);
+    glLineWidth(2);
+    glBegin(GL_LINES);
+        // Tallo rosa
+        glVertex2f(44, 33); glVertex2f(44, 36.2);
+        // Tallo amarillo
+        glVertex2f(47.5, 31); glVertex2f(47.5, 34.2);
+        // Tallo morado
+        glVertex2f(51, 29); glVertex2f(51, 32);
+    glEnd();
+}
+
 //Escritorio
 void escritorio()
 {
@@ -804,37 +1016,4 @@ void mesaNoche()
     glEnd();
 
     
-}
-
-//Espejo (detalle agregado)
-void espejo()
-{
-    // Marco de madera
-    glColor3f(0.35f, 0.22f, 0.12f);
-
-    glBegin(GL_POLYGON);
-        glVertex2f(11,65);
-        glVertex2f(19,73);
-        glVertex2f(17,100);
-        glVertex2f(9,92);
-    glEnd();
-
-    // Superficie reflejante
-    glColor3f(0.80f, 0.87f, 0.93f);
-
-    glBegin(GL_POLYGON);
-        glVertex2f(12,68);
-        glVertex2f(17,74.5);
-        glVertex2f(15.5,96);
-        glVertex2f(10.5,89);
-    glEnd();
-
-    // Brillo diagonal del vidrio
-    glColor3f(0.95f, 0.98f, 1.0f);
-    glLineWidth(2);
-
-    glBegin(GL_LINES);
-        glVertex2f(13,71);
-        glVertex2f(14.5,93);
-    glEnd();
 }
