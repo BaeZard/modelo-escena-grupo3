@@ -37,8 +37,33 @@ void lampara(void);
 
 //--------------------------------------
 //FORMAS Y OBJETOS DE YESSICA BERNALOA
+//ESPEJO EN PARED IZQUIERDA
+void espejoPared(void);
+//RELOJ DE PARED
+void relojPared(void);
 //REPISA
 void repisa(void);
+//FLORERO
+void objFlorero(void);
+//PELUCHE
+void objPeluche(void);
+//PILA DE LIBROS
+void objPilaLibros(void);
+//PORTARETRATOS
+void objPortarretrato(void);
+//MACETA
+void objMaceta(void);
+//LIBROS PARADOS
+void objLibrosParados(void);
+//LIBROS EXTRA
+void librosExtra(void);
+//REPISA
+void objEnRepisa(void (*obj)(void), float bx, float by, float k, float dx, float dy);
+
+//Utilidades de dibujo
+void circuloRelleno(float cx, float cy, float r, int lados);
+void quad2f(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
+
 
 //--------------------------------------
 //FORMAS Y OBJETOS DE CARLOS ZAMORA
@@ -120,6 +145,13 @@ void dibujar()
 	glScalef(0.8f, 0.8f, 1.0f);
 	paredDerecha();
 	glPopMatrix();
+	
+    //YESSICA - Espejo al lado de la puerta
+    glPushMatrix();
+    glScalef(0.8f, 0.8f, 1.0f);
+    glTranslatef(8.2f, -18.5f, 0.1f);
+    espejoPared();
+    glPopMatrix();
 
 	//BELEN - PUERTA
     glPushMatrix();
@@ -127,12 +159,22 @@ void dibujar()
 	puerta();
 	glPopMatrix();
 
-	//YESSICA - Repisa en la pared
+	//YESSICA - Repisa en la pared (con objetos incorporados)
     glPushMatrix();
     glScalef(0.8f, 0.8f, 1.0f);
     repisa();
     glPopMatrix();
-    
+
+    //YESSICA - Reloj de pared
+    glPushMatrix();
+    glTranslatef(-76.0f, 20.0f, 0.0f);
+    glTranslatef(56.0f * 0.5f, 68.0f * 0.5f, 0.0f);
+    glRotatef(-20.0f, 0.0f, 0.0f, -12.0f);
+    glTranslatef(-58.0f * 0.5f, -68.0f * 0.5f, 0.0f);
+    glScalef(0.5f, 0.5f, 1.0f);
+    relojPared();
+    glPopMatrix();
+
 	//BELEN - Mesita
 	glPushMatrix();
 	glTranslatef(25.0f, -10.0f, 0.0f);
@@ -198,6 +240,18 @@ void dibujar()
 	//BELEN - Ventana
 	glPushMatrix();
 	ventana();
+	glPopMatrix();
+	
+	//YESSICA - libros parados
+    glPushMatrix();
+	glTranslatef(30.0f, 50.0f, 2.0f);
+ 	librosExtra();
+	glPopMatrix();
+  
+  	//YESSICA - LIBROS EXTRA EN LA REPISA
+	glPushMatrix();
+	glTranslatef(-10.0f, 32.0f, 1.0f);
+ 	librosExtra();
 	glPopMatrix();
 	
 	//CARLOS: "Foco encima de la ventana (reubicado: ya no se encima con el cuadro blanco)"
@@ -312,6 +366,31 @@ int main(int argc, char** argv)
 
     glutMainLoop();
     return 0;
+}
+
+
+//UTILIDADES - Yessica
+void circuloRelleno(float cx, float cy, float r, int lados)
+{
+    int i;
+    glBegin(GL_POLYGON);
+    for (i = 0; i < lados; i++)
+    {
+        float a = 2.0f * 3.1415926f * i / (float)lados;
+        glVertex2f(cx + r * cos(a), cy + r * sin(a));
+    }
+    glEnd();
+}
+
+void quad2f(float x1, float y1, float x2, float y2,
+            float x3, float y3, float x4, float y4)
+{
+    glBegin(GL_POLYGON);
+        glVertex2f(x1, y1);
+        glVertex2f(x2, y2);
+        glVertex2f(x3, y3);
+        glVertex2f(x4, y4);
+    glEnd();
 }
 
 //PISO - Belen
@@ -1064,7 +1143,7 @@ void mesaNoche()
 	glEnd();
     
 }
-
+/*
 //Repisa - Yessica
 void repisa()
 {
@@ -1133,7 +1212,7 @@ void repisa()
         glVertex2f(32, 80);
         glVertex2f(20, 88);
     glEnd();
-}
+}*/
 
 //JARDINERA - CARLOS
 void jardinera()
@@ -1709,4 +1788,488 @@ void lentes() {
         glVertex2f(9,1);
     glEnd();
 }
+
+//Espejo de Pared - Yessica
+void espejoPared()
+{
+    // MARCO DEL ESPEJO
+    glColor3f(0.50f, 0.32f, 0.18f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-90, -10);
+        glVertex2f(-75, -2);
+        glVertex2f(-80, 58);
+        glVertex2f(-95, 50);
+    glEnd();
+
+    // CRISTAL / REFLEJO DEL ESPEJO
+    glColor3f(0.82f, 0.90f, 0.96f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-88, -7);
+        glVertex2f(-77, -1);
+        glVertex2f(-82, 55);
+        glVertex2f(-93, 48);
+    glEnd();
+
+    // DESTELLO / BRILLO REFLEJADO
+    glColor3f(0.95f, 0.98f, 1.0f);
+    glLineWidth(2);
+    glBegin(GL_LINES);
+        glVertex2f(-89, 15); glVertex2f(-84, 40);
+        glVertex2f(-86, 10); glVertex2f(-82, 30);
+    glEnd();
+}
+
+
+//REPISA + OBJETOS (tramo izquierdo, CENTRO y tramo derecho) - Yessica
+void repisa()
+{
+    int i;
+
+    // 1. SOMBRA PROYECTADA EN LA PARED
+    glColor3f(0.68f, 0.67f, 0.58f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-32, 63);
+        glVertex2f(20, 84);
+        glVertex2f(38, 78);
+        glVertex2f(38, 82);
+        glVertex2f(20, 89);
+        glVertex2f(-32, 68);
+    glEnd();
+
+    // 2. SOPORTES / MENSULAS DE MADERA
+    glColor3f(0.50f, 0.22f, 0.10f);
+    glBegin(GL_TRIANGLES);
+        glVertex2f(-22, 72); glVertex2f(-17, 74.0f); glVertex2f(-22, 65);
+    glEnd();
+    glBegin(GL_TRIANGLES);
+        glVertex2f(0, 81.8f); glVertex2f(5, 84.0f); glVertex2f(0, 75.0f);
+    glEnd();
+    glBegin(GL_TRIANGLES);
+        glVertex2f(28, 84); glVertex2f(34, 82.5f); glVertex2f(32, 78);
+    glEnd();
+
+    // 3. TABLA SUPERIOR
+    glColor3f(0.82f, 0.52f, 0.32f);
+    quad2f(-31, 76, 20, 97, 20, 91, -22, 72);   // tramo izquierdo
+    quad2f(20, 97, 36, 88, 32, 80, 20, 91);     // tramo derecho
+
+    // 3b. VETAS DE LA MADERA (realismo)
+    glColor3f(0.72f, 0.44f, 0.26f);
+    glLineWidth(1);
+    glBegin(GL_LINES);
+        glVertex2f(-28.0f, 76.6f); glVertex2f(20.0f, 96.0f);
+        glVertex2f(-26.0f, 75.0f); glVertex2f(20.0f, 94.0f);
+        glVertex2f(-24.0f, 73.6f); glVertex2f(20.0f, 92.4f);
+        glVertex2f(20.0f, 95.5f);  glVertex2f(34.5f, 87.4f);
+        glVertex2f(20.0f, 93.2f);  glVertex2f(33.0f, 85.6f);
+    glEnd();
+
+    // 4. CANTO FRONTAL Y GROSOR
+    glColor3f(0.60f, 0.32f, 0.18f);
+    quad2f(-22, 72, 20, 91, 20, 88, -22, 69);   // canto izquierdo
+    quad2f(20, 91, 32, 83, 32, 80, 20, 88);     // canto derecho
+
+    // ==========================================
+    // OBJETOS SOBRE LA TABLA
+    // Cada objeto se escala desde su punto de apoyo (bx,by) con factor k,
+    // asi crece de tamano pero sigue "parado" sobre la repisa.
+    // ==========================================
+    objEnRepisa(objFlorero,       -24.0f, 75.2f, 1.25f,   1.5f,   1.6f);
+    objEnRepisa(objPeluche,       -12.5f, 79.8f, 1.25f,   1.0f,   1.4f);
+    objEnRepisa(objPilaLibros,     -2.5f, 82.9f, 1.30f,   0.6f,   1.2f);
+    objEnRepisa(objPortarretrato,   5.9f, 86.6f, 1.25f,   1.6f,   1.2f);
+    objEnRepisa(objMaceta,         16.5f, 91.1f, 1.28f,  -0.4f,   0.8f);
+    objEnRepisa(objLibrosParados, 32.5f, 89.0f, 1.15f, 0.0f, 0.0f);
+
+    (void)i;
+}
+
+// Aplica: traslacion de ajuste + escalado respecto del punto de apoyo
+void objEnRepisa(void (*obj)(void), float bx, float by, float k, float dx, float dy)
+{
+    glPushMatrix();
+        glTranslatef(dx, dy, 0.0f);
+        glTranslatef(bx, by, 0.0f);
+        glScalef(k, k, 1.0f);
+        glTranslatef(-bx, -by, 0.0f);
+        obj();
+    glPopMatrix();
+}
+
+//FLORERO - Yessica
+void objFlorero()
+{
+    int i;
+
+    // sombra de contacto
+    glColor3f(0.70f, 0.42f, 0.24f);
+    quad2f(-25.5f, 74.6f, -21.5f, 76.8f, -20.2f, 75.6f, -25.2f, 73.4f);
+
+    // CUERPO DEL FLORERO -- tres franjas de tono para dar volumen curvo
+    glColor3f(0.14f, 0.50f, 0.46f);                 // cara oscura (izquierda)
+    quad2f(-25.2f, 75.2f, -23.6f, 76.3f, -22.6f, 82.5f, -25.0f, 81.5f);
+
+    glColor3f(0.20f, 0.62f, 0.57f);                  // cuerpo medio
+    quad2f(-23.6f, 75.9f, -22.2f, 77.0f, -21.4f, 83.0f, -23.6f, 82.0f);
+
+    glColor3f(0.32f, 0.74f, 0.68f);                  // brillo derecho
+    quad2f(-22.8f, 76.6f, -21.4f, 77.2f, -20.8f, 82.6f, -22.0f, 82.2f);
+
+    // CUELLO (mas angosto que el cuerpo)
+    glColor3f(0.18f, 0.56f, 0.52f);
+    quad2f(-23.6f, 82.0f, -21.8f, 82.8f, -21.4f, 85.6f, -24.0f, 85.0f);
+
+    // BOCA / BORDE SUPERIOR (elipse aplastada con circuloRelleno escalado)
+    glPushMatrix();
+        glTranslatef(-22.7f, 85.3f, 0.0f);
+        glScalef(1.0f, 0.42f, 1.0f);
+        glColor3f(0.12f, 0.42f, 0.40f);
+        circuloRelleno(0.0f, 0.0f, 1.1f, 18);
+    glPopMatrix();
+
+    // TALLO CASI VERTICAL
+	glColor3f(0.20f, 0.60f, 0.20f);
+	glLineWidth(2);
+	
+	glBegin(GL_LINES);
+	    glVertex2f(-22.4f, 85.6f);
+	    glVertex2f(-22.1f, 92.5f);
+	glEnd();
+
+    // HOJA IZQUIERDA
+	glColor3f(0.12f, 0.48f, 0.18f);
+	glBegin(GL_POLYGON);
+	    glVertex2f(-22.0f, 89.0f);
+	    glVertex2f(-19.0f, 91.0f);
+	    glVertex2f(-21.5f, 87.5f);
+	    glVertex2f(-23.0f, 86.8f);
+	glEnd();
+
+	// HOJA DERECHA
+	glColor3f(0.16f, 0.58f, 0.24f);
+	glBegin(GL_POLYGON);
+	    glVertex2f(-22.0f, 90.5f);
+	    glVertex2f(-24.0f, 92.0f);
+	    glVertex2f(-22.4f, 88.0f);
+	    glVertex2f(-21.0f, 88.2f);
+	glEnd();
+
+    // FLOR -- pétalos redondos alrededor de un centro naranja
+    glColor3f(0.97f, 0.80f, 0.22f);
+    for (i = 0; i < 6; i++)
+    {
+        float a = 2.0f * 3.1415926f * i / 6.0f;
+        float px = -22.1f + 1.1f * cos(a);
+		float py = 93.0f + 1.1f * sin(a);
+        circuloRelleno(px, py, 0.55f, 10);
+    }
+    glColor3f(0.85f, 0.45f, 0.12f);
+    circuloRelleno(-22.1f, 93.0f, 0.6f, 12);
+
+    // BRILLO SOBRE EL CUERPO DEL FLORERO
+    glColor3f(0.75f, 0.90f, 0.88f);
+    glLineWidth(1.5f);
+    glBegin(GL_LINES);
+        glVertex2f(-24.7f, 77.0f); glVertex2f(-23.6f, 81.3f);
+    glEnd();
+}
+
+//PELUCHE - Yessica
+void objPeluche()
+{
+    // sombra de contacto
+    glColor3f(0.70f, 0.42f, 0.24f);
+    quad2f(-15.5f, 78.6f, -9.5f, 81.2f, -8.2f, 80.0f, -14.2f, 77.4f);
+
+    // CUERPO
+    glColor3f(0.68f, 0.42f, 0.23f);
+    quad2f(-15, 79, -10, 81, -10, 87, -15, 85);
+
+    // OREJAS -- redondas
+    glColor3f(0.62f, 0.38f, 0.20f);
+    circuloRelleno(-16.0f, 91.4f, 1.35f, 16);
+    circuloRelleno(-10.2f, 93.6f, 1.35f, 16);
+    glColor3f(0.82f, 0.55f, 0.34f);                 // interior de la oreja
+    circuloRelleno(-16.0f, 91.4f, 0.75f, 14);
+    circuloRelleno(-10.2f, 93.6f, 0.75f, 14);
+
+    // CABEZA
+    glColor3f(0.75f, 0.50f, 0.28f);
+    quad2f(-16, 85, -9, 87.8f, -9, 93, -16, 90.2f);
+
+    // PARCHE DEL HOCICO
+    glColor3f(0.95f, 0.90f, 0.80f);
+    quad2f(-14, 86.5f, -11, 87.7f, -11, 90, -14, 88.8f);
+
+    // NARIZ
+    glColor3f(0.20f, 0.14f, 0.10f);
+    circuloRelleno(-12.5f, 88.6f, 0.42f, 10);
+
+    // OJOS
+    glColor3f(0.10f, 0.08f, 0.06f);
+    circuloRelleno(-14.0f, 89.9f, 0.38f, 10);
+    circuloRelleno(-10.8f, 90.9f, 0.38f, 10);
+    // brillo en los ojos
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glPointSize(2);
+    glBegin(GL_POINTS);
+        glVertex2f(-14.15f, 90.05f);
+        glVertex2f(-10.95f, 91.05f);
+    glEnd();
+
+    // MOÑO ROJO
+    glColor3f(0.85f, 0.20f, 0.25f);
+    glBegin(GL_TRIANGLES);
+        glVertex2f(-12.5f, 84.5f); glVertex2f(-16.0f, 83.2f); glVertex2f(-13.5f, 86.0f);
+        glVertex2f(-12.5f, 84.5f); glVertex2f(-9.2f, 84.8f); glVertex2f(-11.8f, 86.0f);
+    glEnd();
+    glColor3f(0.65f, 0.10f, 0.14f);                  // nudo central del moño
+    circuloRelleno(-12.5f, 84.7f, 0.4f, 10);
+}
+
+//PILA DE LIBROS - Yessica
+void objPilaLibros()
+{
+    glColor3f(0.70f, 0.42f, 0.24f);
+    quad2f(-6.4f, 81.0f, 1.4f, 84.6f, 2.6f, 83.4f, -5.2f, 79.8f);
+
+    glColor3f(0.18f, 0.28f, 0.52f);
+    quad2f(-6.0f, 81.4f, 1.0f, 84.4f, 1.0f, 86.0f, -6.0f, 83.0f);
+    glColor3f(0.26f, 0.38f, 0.66f);
+    quad2f(-6.0f, 83.0f, 1.0f, 86.0f, 0.2f, 87.6f, -6.8f, 84.6f);
+
+    glColor3f(0.80f, 0.62f, 0.20f);
+    quad2f(-5.6f, 83.6f, 0.5f, 86.2f, 0.5f, 87.6f, -5.6f, 85.0f);
+    glColor3f(0.90f, 0.74f, 0.30f);
+    quad2f(-5.6f, 85.0f, 0.5f, 87.6f, -0.3f, 89.1f, -6.4f, 86.5f);
+
+    glColor3f(0.16f, 0.42f, 0.28f);
+    quad2f(-5.0f, 85.4f, 0.0f, 87.6f, 0.0f, 88.8f, -5.0f, 86.6f);
+    glColor3f(0.24f, 0.56f, 0.36f);
+    quad2f(-5.0f, 86.6f, 0.0f, 88.8f, -0.8f, 90.3f, -5.8f, 88.1f);
+
+    glColor3f(0.94f, 0.92f, 0.84f);
+    glLineWidth(1.4f);
+    glBegin(GL_LINES);
+        glVertex2f(-5.9f, 82.0f); glVertex2f(0.9f, 84.9f);
+        glVertex2f(-5.5f, 84.1f); glVertex2f(0.4f, 86.7f);
+        glVertex2f(-4.9f, 85.8f); glVertex2f(-0.1f, 88.0f);
+    glEnd();
+
+    // Despertador sobre los libros
+    glColor3f(0.85f, 0.25f, 0.22f);
+    circuloRelleno(-2.6f, 92.4f, 2.0f, 24);
+    glColor3f(0.97f, 0.95f, 0.88f);
+    circuloRelleno(-2.6f, 92.4f, 1.5f, 24);
+    glColor3f(0.20f, 0.20f, 0.20f);
+    glLineWidth(1.5f);
+    glBegin(GL_LINES);
+        glVertex2f(-2.6f, 92.4f); glVertex2f(-2.6f, 93.6f);
+        glVertex2f(-2.6f, 92.4f); glVertex2f(-1.7f, 92.0f);
+    glEnd();
+    glColor3f(0.85f, 0.25f, 0.22f);
+    glPointSize(5);
+    glBegin(GL_POINTS);
+        glVertex2f(-4.4f, 94.0f);
+        glVertex2f(-1.0f, 94.0f);
+    glEnd();
+}
+
+//PORTARRETRATO - Yessica
+void objPortarretrato()
+{
+    glColor3f(0.70f, 0.42f, 0.24f);
+    quad2f(2.6f, 85.0f, 9.0f, 87.9f, 10.2f, 86.7f, 3.8f, 83.8f);
+
+    glColor3f(0.42f, 0.26f, 0.14f);
+    quad2f(3.0f, 85.3f, 8.8f, 87.9f, 8.8f, 94.9f, 3.0f, 92.3f);
+    glColor3f(0.55f, 0.36f, 0.20f);
+    quad2f(3.0f, 92.3f, 8.8f, 94.9f, 8.0f, 96.1f, 2.2f, 93.5f);
+    glColor3f(0.62f, 0.82f, 0.94f);
+    quad2f(3.8f, 86.4f, 8.0f, 88.3f, 8.0f, 93.8f, 3.8f, 91.9f);
+    glColor3f(0.98f, 0.88f, 0.35f);
+    circuloRelleno(6.8f, 92.0f, 0.7f, 16);
+    glColor3f(0.30f, 0.60f, 0.32f);
+    glBegin(GL_TRIANGLES);
+        glVertex2f(3.8f, 86.4f); glVertex2f(8.0f, 88.3f); glVertex2f(5.6f, 91.0f);
+    glEnd();
+    glColor3f(0.42f, 0.72f, 0.42f);
+    glBegin(GL_TRIANGLES);
+        glVertex2f(5.2f, 87.0f); glVertex2f(8.0f, 88.3f); glVertex2f(7.4f, 90.4f);
+    glEnd();
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glLineWidth(1.2f);
+    glBegin(GL_LINES);
+        glVertex2f(4.2f, 87.4f); glVertex2f(6.4f, 92.8f);
+        glVertex2f(5.2f, 87.0f); glVertex2f(6.9f, 91.2f);
+    glEnd();
+}
+
+//MACETA CON SUCULENTA - Yessica
+void objMaceta()
+{
+    glColor3f(0.70f, 0.42f, 0.24f);
+    quad2f(14.9f, 90.4f, 18.4f, 92.0f, 19.6f, 90.8f, 16.1f, 89.2f);
+
+    glColor3f(0.78f, 0.42f, 0.26f);
+    quad2f(15.2f, 90.5f, 17.9f, 91.7f, 18.5f, 95.0f, 14.9f, 93.4f);
+    glColor3f(0.64f, 0.32f, 0.18f);
+    quad2f(17.2f, 91.4f, 17.9f, 91.7f, 18.5f, 95.0f, 17.7f, 94.6f);
+    glColor3f(0.86f, 0.50f, 0.32f);
+    quad2f(14.9f, 93.4f, 18.5f, 95.0f, 18.4f, 95.9f, 14.8f, 94.3f);
+    glColor3f(0.30f, 0.22f, 0.16f);
+    quad2f(15.3f, 94.4f, 18.0f, 95.6f, 17.9f, 96.0f, 15.2f, 94.8f);
+    glColor3f(0.24f, 0.58f, 0.32f);
+    glBegin(GL_TRIANGLES);
+        glVertex2f(16.6f, 95.2f); glVertex2f(15.0f, 96.4f); glVertex2f(16.2f, 98.2f);
+        glVertex2f(16.6f, 95.2f); glVertex2f(16.4f, 99.2f); glVertex2f(17.4f, 97.6f);
+        glVertex2f(16.6f, 95.2f); glVertex2f(18.6f, 96.6f); glVertex2f(17.3f, 98.4f);
+    glEnd();
+    glColor3f(0.36f, 0.72f, 0.42f);
+    glBegin(GL_TRIANGLES);
+        glVertex2f(16.6f, 95.4f); glVertex2f(15.6f, 97.4f); glVertex2f(16.9f, 97.6f);
+    glEnd();
+}
+
+//LIBROS PARADOS (tramo derecho) - Yessica
+void objLibrosParados()
+{
+    glColor3f(0.20f, 0.40f, 0.75f);
+    quad2f(23, 91.5f, 24.5f, 90.7f, 24.5f, 99.7f, 23, 100.5f);
+    glColor3f(0.35f, 0.55f, 0.90f);
+    quad2f(24.5f, 90.7f, 27.5f, 89.1f, 27.5f, 98.1f, 24.5f, 99.7f);
+
+    glColor3f(0.18f, 0.55f, 0.30f);
+    quad2f(25, 90.4f, 26.5f, 89.6f, 26.5f, 97.6f, 25, 98.4f);
+    glColor3f(0.30f, 0.70f, 0.45f);
+    quad2f(26.5f, 89.6f, 29.5f, 88.0f, 29.5f, 96.0f, 26.5f, 97.6f);
+
+    glColor3f(0.75f, 0.25f, 0.25f);
+    quad2f(27, 89.3f, 28.5f, 88.5f, 28.5f, 97.5f, 27, 98.3f);
+    glColor3f(0.90f, 0.40f, 0.40f);
+    quad2f(28.5f, 88.5f, 31.5f, 86.9f, 31.5f, 95.9f, 28.5f, 97.5f);
+
+    glColor3f(0.92f, 0.92f, 0.86f);
+    glLineWidth(1);
+    glBegin(GL_LINES);
+        glVertex2f(24.8f, 91.0f); glVertex2f(24.8f, 99.3f);
+        glVertex2f(26.8f, 89.8f); glVertex2f(26.8f, 97.2f);
+        glVertex2f(28.8f, 88.7f); glVertex2f(28.8f, 97.1f);
+    glEnd();
+}
+
+//Reloj de Pared - Yessica
+void relojPared()
+{
+    int i;
+
+    /// Sombra del reloj: elipse suave desplazada abajo-izquierda,
+    // como una sombra proyectada real (antes era un cuadrado alineado a ejes)
+    glColor3f(0.65f, 0.64f, 0.58f);
+    glPushMatrix();
+        glTranslatef(58.0f - 3.0f, 68.0f - 3.0f, 0.0f);  // centro del reloj, corrido como sombra
+        glScalef(1.0f, 0.82f, 1.0f);                      // aplasta verticalmente
+        circuloRelleno(0.0f, 0.0f, 11.0f, 48);            // circulo dibujado en el origen local
+    glPopMatrix();
+
+    // Marco exterior circular
+    glColor3f(0.28f, 0.18f, 0.10f);
+    circuloRelleno(58.0f, 68.0f, 11.0f, 64);
+
+    // Borde dorado
+    glColor3f(0.85f, 0.68f, 0.25f);
+    circuloRelleno(58.0f, 68.0f, 9.5f, 64);
+
+    // Esfera del reloj
+    glColor3f(0.96f, 0.94f, 0.84f);
+    circuloRelleno(58.0f, 68.0f, 8.7f, 64);
+
+    // Marcas horarias
+    glColor3f(0.15f, 0.12f, 0.10f);
+    glPointSize(3);
+    glBegin(GL_POINTS);
+    for (i = 0; i < 12; i++)
+    {
+        float a = 2.0f * 3.1415926f * i / 12.0f;
+        glVertex2f(58.0f + 7.2f * cos(a), 68.0f + 7.2f * sin(a));
+    }
+    glEnd();
+
+    // Manecillas: 10:10
+    glLineWidth(2.5f);
+    glBegin(GL_LINES);
+        glVertex2f(58, 68); glVertex2f(53.0f, 72.2f);
+        glVertex2f(58, 68); glVertex2f(64.2f, 70.8f);
+    glEnd();
+
+    // Centro
+    glPointSize(4);
+    glBegin(GL_POINTS);
+        glVertex2f(58, 68);
+    glEnd();
+
+    // Brillo del cristal
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glLineWidth(1.5f);
+    glBegin(GL_LINES);
+        glVertex2f(52.5f, 73.5f); glVertex2f(55.0f, 75.5f);
+    glEnd();
+}
+
+//LIBROS EXTRA - YESSICA
+void librosExtra()
+{
+    // Sombra
+    glColor3f(0.55f, 0.32f, 0.18f);
+
+    quad2f(
+        -4, 73,
+        8, 78,
+        9, 76,
+        -3, 71
+    );
+
+    // Libro azul
+    glColor3f(0.18f, 0.35f, 0.70f);
+
+    quad2f(
+        -4, 73,
+        5, 77,
+        5, 79,
+        -4, 75
+    );
+
+    // Libro verde
+    glColor3f(0.25f, 0.55f, 0.35f);
+
+    quad2f(
+        -3, 75,
+        6, 79,
+        6, 81,
+        -3, 77
+    );
+
+    // Libro rojo
+    glColor3f(0.72f, 0.25f, 0.25f);
+
+    quad2f(
+        -2, 77,
+        7, 81,
+        7, 83,
+        -2, 79
+    );
+
+    // Líneas de páginas
+    glColor3f(0.95f, 0.90f, 0.72f);
+    glLineWidth(1);
+
+    glBegin(GL_LINES);
+        glVertex2f(-1, 78);
+        glVertex2f(6, 81);
+
+        glVertex2f(-2, 76);
+        glVertex2f(5, 79);
+    glEnd();
+}
+
 
