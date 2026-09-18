@@ -107,6 +107,10 @@ void bancoMadera(void);
 void mochila(void);
 //Jhon - Patineta
 void patineta(void);
+//Jhon - Una media
+void unaMedia(void);
+//Jhon - Una zapatilla
+void unaZapatilla(void);
 
 
 void inicializar()
@@ -2345,53 +2349,38 @@ void librosExtra()
 //Jhon - Pelota de futbol
 void pelotaFutbol()
 {
-    glColor3f(0.72f, 0.72f, 0.74f);
-    circuloRelleno(0.0f, 4.2f, 4.4f, 28);
+    glPushMatrix();
+    glTranslatef(0.4f, 1.0f, 0.0f);
+    glScalef(1.0f, 0.40f, 1.0f);
+    glColor3f(0.60f, 0.34f, 0.22f);
+    circuloRelleno(0.0f, 0.0f, 4.4f, 20);
+    glPopMatrix();
+
+    glColor3f(0.76f, 0.77f, 0.82f);
+    circuloRelleno(0.0f, 4.6f, 4.2f, 28);
 
     glColor3f(0.98f, 0.98f, 1.0f);
-    circuloRelleno(0.0f, 4.2f, 4.0f, 28);
+    circuloRelleno(0.5f, 5.1f, 3.6f, 28);
 
     glColor3f(0.16f, 0.16f, 0.20f);
-    circuloRelleno(0.0f, 4.6f, 1.5f, 5);
-    circuloRelleno(-2.7f, 6.0f, 0.9f, 5);
-    circuloRelleno(2.7f, 6.0f, 0.9f, 5);
-    circuloRelleno(-2.4f, 2.3f, 0.8f, 5);
-    circuloRelleno(2.4f, 2.3f, 0.8f, 5);
+    circuloRelleno(0.4f, 5.2f, 1.5f, 5);
+    circuloRelleno(-2.3f, 6.8f, 0.9f, 5);
+    circuloRelleno(3.2f, 6.4f, 0.85f, 5);
+    circuloRelleno(-2.5f, 3.0f, 0.8f, 5);
+    circuloRelleno(2.6f, 2.6f, 0.75f, 5);
 }
 
 //Jhon - Tacho pequeno
 void tachoPequeno()
 {
-    glColor3f(0.46f, 0.53f, 0.60f);
+    glColor3f(0.60f, 0.34f, 0.22f);
 
     glBegin(GL_POLYGON);
 
-        glVertex2f(0,0);
-        glVertex2f(4,3.4);
-        glVertex2f(8,0);
-        glVertex2f(4,-3.4);
-
-    glEnd();
-
-    glColor3f(0.14f, 0.16f, 0.20f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(1.2f,0);
-        glVertex2f(4,2.4f);
-        glVertex2f(6.8f,0);
-        glVertex2f(4,-2.4f);
-
-    glEnd();
-
-    glColor3f(0.33f, 0.39f, 0.47f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(4,-3.4);
-        glVertex2f(8,0);
-        glVertex2f(7.2f,-9.5);
-        glVertex2f(4,-12.4);
+        glVertex2f(0.2f,-12.6f);
+        glVertex2f(4.0f,-15.6f);
+        glVertex2f(8.4f,-12.0f);
+        glVertex2f(4.6f,-9.0f);
 
     glEnd();
 
@@ -2400,9 +2389,53 @@ void tachoPequeno()
     glBegin(GL_POLYGON);
 
         glVertex2f(0,0);
-        glVertex2f(4,-3.4);
-        glVertex2f(4,-12.4);
-        glVertex2f(0.8f,-9.5);
+        glVertex2f(4,-3.4f);
+        glVertex2f(4,-12.4f);
+        glVertex2f(0.8f,-9.6f);
+
+    glEnd();
+
+    glColor3f(0.36f, 0.42f, 0.50f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(4,-3.4f);
+        glVertex2f(8,0);
+        glVertex2f(7.2f,-9.6f);
+        glVertex2f(4,-12.4f);
+
+    glEnd();
+
+    glColor3f(0.46f, 0.53f, 0.61f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(5.4f,-4.6f);
+        glVertex2f(6.4f,-3.8f);
+        glVertex2f(5.9f,-9.4f);
+        glVertex2f(4.9f,-10.2f);
+
+    glEnd();
+
+    glColor3f(0.54f, 0.61f, 0.68f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0,0);
+        glVertex2f(4,3.4f);
+        glVertex2f(8,0);
+        glVertex2f(4,-3.4f);
+
+    glEnd();
+
+    glColor3f(0.13f, 0.15f, 0.19f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(1.3f,0);
+        glVertex2f(4,2.3f);
+        glVertex2f(6.7f,0);
+        glVertex2f(4,-2.3f);
 
     glEnd();
 
@@ -2410,137 +2443,298 @@ void tachoPequeno()
 
     glBegin(GL_POLYGON);
 
-        glVertex2f(2.6f,0.6f);
-        glVertex2f(3.6f,2.0f);
-        glVertex2f(5.0f,1.2f);
-        glVertex2f(4.0f,-0.2f);
+        glVertex2f(2.8f,0.5f);
+        glVertex2f(3.7f,1.9f);
+        glVertex2f(5.2f,1.1f);
+        glVertex2f(4.3f,-0.3f);
 
     glEnd();
+}
+
+//Jhon - Una media
+void unaMedia()
+{
+    glPushMatrix();
+    glScalef(1.0f, 0.58f, 1.0f);
+
+    glColor3f(0.60f, 0.34f, 0.22f);
+    circuloRelleno(0.6f, -1.8f, 3.4f, 18);
+    circuloRelleno(3.4f, -0.6f, 2.6f, 18);
+
+    glColor3f(0.74f, 0.76f, 0.82f);
+    circuloRelleno(0.0f, 0.0f, 3.2f, 18);
+    circuloRelleno(3.0f, 1.2f, 2.5f, 18);
+
+    glColor3f(0.93f, 0.94f, 0.98f);
+    circuloRelleno(0.3f, 0.8f, 2.8f, 18);
+    circuloRelleno(3.2f, 1.9f, 2.2f, 18);
+
+    glColor3f(0.82f, 0.84f, 0.89f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(1.8f,2.6f);
+        glVertex2f(2.6f,3.4f);
+        glVertex2f(3.6f,1.2f);
+        glVertex2f(2.8f,0.4f);
+
+    glEnd();
+
+    glColor3f(0.86f, 0.40f, 0.35f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(-1.6f,2.4f);
+        glVertex2f(-0.8f,3.0f);
+        glVertex2f(1.4f,2.4f);
+        glVertex2f(0.8f,1.6f);
+
+    glEnd();
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+    circuloRelleno(-0.6f, 1.8f, 0.9f, 12);
+
+    glPopMatrix();
 }
 
 //Jhon - Par de medias
 void parMedias()
 {
     glPushMatrix();
-    glScalef(1.0f, 0.66f, 1.0f);
-
-    glColor3f(0.93f, 0.94f, 0.97f);
-    circuloRelleno(0.0f, 0.0f, 3.2f, 18);
-    circuloRelleno(6.2f, 2.6f, 3.0f, 18);
-
-    glColor3f(0.80f, 0.83f, 0.88f);
-    circuloRelleno(-1.0f, -1.0f, 2.0f, 18);
-    circuloRelleno(5.2f, 1.6f, 1.9f, 18);
-
-    glColor3f(0.86f, 0.40f, 0.35f);
-    circuloRelleno(1.6f, 1.2f, 1.5f, 14);
-    circuloRelleno(7.8f, 3.8f, 1.4f, 14);
-
-    glColor3f(0.93f, 0.94f, 0.97f);
-    circuloRelleno(2.4f, 2.0f, 1.2f, 14);
-    circuloRelleno(8.6f, 4.6f, 1.1f, 14);
-
+    unaMedia();
     glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(6.0f, 2.6f, 0.0f);
+    glScalef(0.92f, 0.92f, 1.0f);
+    unaMedia();
+    glPopMatrix();
+}
+
+//Jhon - Una zapatilla
+void unaZapatilla()
+{
+    glColor3f(0.60f, 0.34f, 0.22f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0.0f,-0.6f);
+        glVertex2f(3.8f,-3.6f);
+        glVertex2f(9.4f,1.0f);
+        glVertex2f(5.6f,4.0f);
+
+    glEnd();
+
+    glColor3f(0.94f, 0.94f, 0.97f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0.8f,1.2f);
+        glVertex2f(4.4f,-1.6f);
+        glVertex2f(9.0f,2.2f);
+        glVertex2f(9.0f,1.0f);
+        glVertex2f(4.4f,-2.8f);
+        glVertex2f(0.8f,0.0f);
+
+    glEnd();
+
+    glColor3f(0.76f, 0.76f, 0.81f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0.8f,0.0f);
+        glVertex2f(4.4f,-2.8f);
+        glVertex2f(4.4f,-1.6f);
+        glVertex2f(0.8f,1.2f);
+
+    glEnd();
+
+    glColor3f(0.24f, 0.33f, 0.52f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(4.4f,-1.6f);
+        glVertex2f(6.6f,0.2f);
+        glVertex2f(6.6f,1.4f);
+        glVertex2f(9.0f,3.4f);
+        glVertex2f(9.0f,2.2f);
+        glVertex2f(4.4f,-1.6f);
+
+    glEnd();
+
+    glColor3f(0.20f, 0.28f, 0.45f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0.8f,1.2f);
+        glVertex2f(4.4f,-1.6f);
+        glVertex2f(4.4f,1.6f);
+        glVertex2f(2.6f,3.0f);
+        glVertex2f(0.8f,3.4f);
+
+    glEnd();
+
+    glColor3f(0.24f, 0.33f, 0.52f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(4.4f,-1.6f);
+        glVertex2f(9.0f,2.2f);
+        glVertex2f(9.0f,3.4f);
+        glVertex2f(6.8f,2.6f);
+        glVertex2f(4.4f,1.6f);
+
+    glEnd();
+
+    glColor3f(0.33f, 0.45f, 0.68f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0.8f,3.4f);
+        glVertex2f(2.6f,3.0f);
+        glVertex2f(4.4f,1.6f);
+        glVertex2f(6.8f,2.6f);
+        glVertex2f(9.0f,3.4f);
+        glVertex2f(6.2f,5.6f);
+        glVertex2f(3.4f,6.0f);
+
+    glEnd();
+
+    glColor3f(0.13f, 0.18f, 0.30f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(2.0f,3.8f);
+        glVertex2f(3.4f,4.9f);
+        glVertex2f(4.8f,3.8f);
+        glVertex2f(3.4f,2.7f);
+
+    glEnd();
+
+    glColor3f(0.94f, 0.94f, 0.97f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(7.2f,2.9f);
+        glVertex2f(9.0f,3.4f);
+        glVertex2f(9.0f,2.2f);
+        glVertex2f(7.2f,1.7f);
+
+    glEnd();
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(4.6f,3.3f);
+        glVertex2f(5.2f,3.8f);
+        glVertex2f(6.6f,3.2f);
+        glVertex2f(6.0f,2.7f);
+
+    glEnd();
 }
 
 //Jhon - Zapatillas
 void zapatillas()
 {
-    glColor3f(0.94f, 0.94f, 0.96f);
+    glPushMatrix();
+    unaZapatilla();
+    glPopMatrix();
 
-    glBegin(GL_POLYGON);
-
-        glVertex2f(0,0);
-        glVertex2f(7.4f,6.2f);
-        glVertex2f(10.0f,4.0f);
-        glVertex2f(2.6f,-2.2f);
-
-    glEnd();
-
-    glColor3f(0.20f, 0.28f, 0.45f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(0.4f,0.5f);
-        glVertex2f(0.9f,3.1f);
-        glVertex2f(6.1f,7.4f);
-        glVertex2f(8.0f,5.8f);
-        glVertex2f(3.0f,-1.7f);
-
-    glEnd();
-
-    glColor3f(0.30f, 0.41f, 0.62f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(0.9f,3.1f);
-        glVertex2f(3.2f,4.8f);
-        glVertex2f(4.4f,3.8f);
-        glVertex2f(2.0f,1.1f);
-
-    glEnd();
-
-    glColor3f(0.94f, 0.94f, 0.96f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(6.1f,7.4f);
-        glVertex2f(8.2f,6.6f);
-        glVertex2f(10.0f,4.8f);
-        glVertex2f(8.0f,5.8f);
-
-    glEnd();
-
-    glColor3f(0.94f, 0.94f, 0.96f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(9.0f,11.0f);
-        glVertex2f(16.4f,17.2f);
-        glVertex2f(19.0f,15.0f);
-        glVertex2f(11.6f,8.8f);
-
-    glEnd();
-
-    glColor3f(0.20f, 0.28f, 0.45f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(9.4f,11.5f);
-        glVertex2f(9.9f,14.1f);
-        glVertex2f(15.1f,18.4f);
-        glVertex2f(17.0f,16.8f);
-        glVertex2f(12.0f,9.3f);
-
-    glEnd();
-
-    glColor3f(0.30f, 0.41f, 0.62f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(9.9f,14.1f);
-        glVertex2f(12.2f,15.8f);
-        glVertex2f(13.4f,14.8f);
-        glVertex2f(11.0f,12.1f);
-
-    glEnd();
-
-    glColor3f(0.94f, 0.94f, 0.96f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(15.1f,18.4f);
-        glVertex2f(17.2f,17.6f);
-        glVertex2f(19.0f,15.8f);
-        glVertex2f(17.0f,16.8f);
-
-    glEnd();
+    glPushMatrix();
+    glTranslatef(8.4f, 10.4f, 0.0f);
+    unaZapatilla();
+    glPopMatrix();
 }
 
 //Jhon - Banco de madera
 void bancoMadera()
 {
-    glColor3f(0.74f, 0.47f, 0.30f);
+    glColor3f(0.60f, 0.34f, 0.22f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0.0f,-15.4f);
+        glVertex2f(7.0f,-20.4f);
+        glVertex2f(15.0f,-14.6f);
+        glVertex2f(8.0f,-9.6f);
+
+    glEnd();
+
+    glColor3f(0.44f, 0.24f, 0.15f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0.4f,-1.6f);
+        glVertex2f(2.2f,-0.6f);
+        glVertex2f(2.2f,-10.4f);
+        glVertex2f(0.4f,-11.4f);
+
+    glEnd();
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(11.8f,-0.6f);
+        glVertex2f(13.6f,-1.6f);
+        glVertex2f(13.6f,-11.4f);
+        glVertex2f(11.8f,-10.4f);
+
+    glEnd();
+
+    glColor3f(0.38f, 0.20f, 0.12f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(2.2f,-4.6f);
+        glVertex2f(11.8f,-4.6f);
+        glVertex2f(11.8f,-5.8f);
+        glVertex2f(2.2f,-5.8f);
+
+    glEnd();
+
+    glColor3f(0.52f, 0.29f, 0.18f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(6.0f,-7.0f);
+        glVertex2f(8.0f,-7.0f);
+        glVertex2f(8.0f,-17.4f);
+        glVertex2f(6.0f,-17.4f);
+
+    glEnd();
+
+    glColor3f(0.42f, 0.23f, 0.14f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(6.0f,-7.0f);
+        glVertex2f(7.0f,-7.0f);
+        glVertex2f(7.0f,-17.4f);
+        glVertex2f(6.0f,-17.4f);
+
+    glEnd();
+
+    glColor3f(0.50f, 0.28f, 0.17f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0,0);
+        glVertex2f(7,-5.9f);
+        glVertex2f(7,-8.5f);
+        glVertex2f(0,-2.6f);
+
+    glEnd();
+
+    glColor3f(0.60f, 0.35f, 0.21f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(7,-5.9f);
+        glVertex2f(14,0);
+        glVertex2f(14,-2.6f);
+        glVertex2f(7,-8.5f);
+
+    glEnd();
+
+    glColor3f(0.78f, 0.50f, 0.32f);
 
     glBegin(GL_POLYGON);
 
@@ -2551,56 +2745,14 @@ void bancoMadera()
 
     glEnd();
 
-    glColor3f(0.58f, 0.33f, 0.20f);
+    glColor3f(0.68f, 0.42f, 0.26f);
 
     glBegin(GL_POLYGON);
 
-        glVertex2f(7,-5.9f);
-        glVertex2f(14,0);
-        glVertex2f(14,-2.2f);
-        glVertex2f(7,-8.1f);
-
-    glEnd();
-
-    glColor3f(0.48f, 0.26f, 0.16f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(0,0);
-        glVertex2f(7,-5.9f);
-        glVertex2f(7,-8.1f);
-        glVertex2f(0,-2.2f);
-
-    glEnd();
-
-    glColor3f(0.52f, 0.29f, 0.18f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(6.2f,-7.6f);
-        glVertex2f(7.8f,-7.6f);
-        glVertex2f(7.8f,-16.6f);
-        glVertex2f(6.2f,-16.6f);
-
-    glEnd();
-
-    glColor3f(0.44f, 0.24f, 0.15f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(0.6f,-2.0f);
-        glVertex2f(2.0f,-1.2f);
-        glVertex2f(2.0f,-10.0f);
-        glVertex2f(0.6f,-10.8f);
-
-    glEnd();
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(12.0f,-1.2f);
-        glVertex2f(13.4f,-2.0f);
-        glVertex2f(13.4f,-10.8f);
-        glVertex2f(12.0f,-10.0f);
+        glVertex2f(2.6f,0);
+        glVertex2f(7,3.7f);
+        glVertex2f(11.4f,0);
+        glVertex2f(7,-3.7f);
 
     glEnd();
 }
@@ -2608,25 +2760,36 @@ void bancoMadera()
 //Jhon - Mochila
 void mochila()
 {
-    glColor3f(0.24f, 0.34f, 0.52f);
+    glColor3f(0.60f, 0.34f, 0.22f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(1.2f,2.4f);
+        glVertex2f(7.0f,-1.6f);
+        glVertex2f(13.2f,2.8f);
+        glVertex2f(7.4f,6.8f);
+
+    glEnd();
+
+    glColor3f(0.17f, 0.24f, 0.38f);
 
     glBegin(GL_POLYGON);
 
         glVertex2f(2,14);
-        glVertex2f(7,17.5f);
-        glVertex2f(12,14);
         glVertex2f(7,10.5f);
+        glVertex2f(7,0.6f);
+        glVertex2f(2,4.1f);
 
     glEnd();
 
-    glColor3f(0.30f, 0.42f, 0.62f);
+    glColor3f(0.27f, 0.38f, 0.58f);
 
     glBegin(GL_POLYGON);
 
         glVertex2f(7,10.5f);
         glVertex2f(12,14);
-        glVertex2f(12,3.5f);
-        glVertex2f(7,0);
+        glVertex2f(12,4.1f);
+        glVertex2f(7,0.6f);
 
     glEnd();
 
@@ -2634,10 +2797,10 @@ void mochila()
 
     glBegin(GL_POLYGON);
 
-        glVertex2f(2,14);
-        glVertex2f(7,10.5f);
-        glVertex2f(7,0);
-        glVertex2f(2,3.5f);
+        glVertex2f(7,3.2f);
+        glVertex2f(12,6.7f);
+        glVertex2f(12,4.1f);
+        glVertex2f(7,0.6f);
 
     glEnd();
 
@@ -2645,21 +2808,32 @@ void mochila()
 
     glBegin(GL_POLYGON);
 
-        glVertex2f(8.2f,8.2f);
-        glVertex2f(11.2f,10.3f);
-        glVertex2f(11.2f,5.0f);
-        glVertex2f(8.2f,2.9f);
+        glVertex2f(8.2f,8.4f);
+        glVertex2f(11.2f,10.5f);
+        glVertex2f(11.2f,5.4f);
+        glVertex2f(8.2f,3.3f);
 
     glEnd();
 
-    glColor3f(0.16f, 0.22f, 0.36f);
+    glColor3f(0.72f, 0.33f, 0.24f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(8.2f,8.4f);
+        glVertex2f(11.2f,10.5f);
+        glVertex2f(11.2f,9.5f);
+        glVertex2f(8.2f,7.4f);
+
+    glEnd();
+
+    glColor3f(0.14f, 0.20f, 0.33f);
 
     glBegin(GL_POLYGON);
 
         glVertex2f(3.2f,12.4f);
         glVertex2f(4.2f,11.7f);
-        glVertex2f(4.2f,2.4f);
-        glVertex2f(3.2f,3.1f);
+        glVertex2f(4.2f,3.0f);
+        glVertex2f(3.2f,3.7f);
 
     glEnd();
 
@@ -2667,21 +2841,32 @@ void mochila()
 
         glVertex2f(5.2f,11.0f);
         glVertex2f(6.2f,10.3f);
-        glVertex2f(6.2f,1.0f);
-        glVertex2f(5.2f,1.7f);
+        glVertex2f(6.2f,1.6f);
+        glVertex2f(5.2f,2.3f);
 
     glEnd();
 
-    glColor3f(0.18f, 0.25f, 0.40f);
+    glColor3f(0.31f, 0.43f, 0.64f);
 
     glBegin(GL_POLYGON);
 
         glVertex2f(2,14);
         glVertex2f(7,17.5f);
         glVertex2f(12,14);
-        glVertex2f(12,11.6f);
-        glVertex2f(7,15.1f);
-        glVertex2f(2,11.6f);
+        glVertex2f(7,10.5f);
+
+    glEnd();
+
+    glColor3f(0.22f, 0.31f, 0.48f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(2,14);
+        glVertex2f(7,17.5f);
+        glVertex2f(12,14);
+        glVertex2f(12,12.2f);
+        glVertex2f(7,15.7f);
+        glVertex2f(2,12.2f);
 
     glEnd();
 
@@ -2692,9 +2877,9 @@ void mochila()
         glVertex2f(5.6f,16.6f);
         glVertex2f(7.0f,17.5f);
         glVertex2f(8.4f,16.6f);
-        glVertex2f(8.4f,19.0f);
-        glVertex2f(7.0f,19.8f);
-        glVertex2f(5.6f,19.0f);
+        glVertex2f(8.4f,19.2f);
+        glVertex2f(7.0f,20.0f);
+        glVertex2f(5.6f,19.2f);
 
     glEnd();
 }
@@ -2702,38 +2887,66 @@ void mochila()
 //Jhon - Patineta
 void patineta()
 {
-    glColor3f(0.62f, 0.62f, 0.66f);
-    circuloRelleno(3.6f, -3.0f, 1.3f, 14);
-    circuloRelleno(20.6f, 11.2f, 1.3f, 14);
+    glColor3f(0.60f, 0.34f, 0.22f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(-0.6f,-1.4f);
+        glVertex2f(5.0f,-6.2f);
+        glVertex2f(23.6f,9.2f);
+        glVertex2f(18.0f,14.0f);
+
+    glEnd();
+
+    glColor3f(0.30f, 0.30f, 0.34f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(3.0f,-1.8f);
+        glVertex2f(5.4f,-3.8f);
+        glVertex2f(6.6f,-2.8f);
+        glVertex2f(4.2f,-0.8f);
+
+    glEnd();
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(17.6f,10.2f);
+        glVertex2f(20.0f,8.2f);
+        glVertex2f(21.2f,9.2f);
+        glVertex2f(18.8f,11.2f);
+
+    glEnd();
+
+    glColor3f(0.72f, 0.70f, 0.66f);
+    circuloRelleno(3.4f,-2.2f,1.4f,14);
+    circuloRelleno(6.2f,-0.2f,1.3f,14);
+    circuloRelleno(18.0f,9.8f,1.4f,14);
+    circuloRelleno(20.8f,11.8f,1.3f,14);
+
+    glColor3f(0.48f, 0.46f, 0.44f);
+    circuloRelleno(3.4f,-2.2f,0.6f,10);
+    circuloRelleno(18.0f,9.8f,0.6f,10);
+
+    glColor3f(0.40f, 0.13f, 0.20f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0,1.4f);
+        glVertex2f(5.3f,-3.2f);
+        glVertex2f(23.8f,12.2f);
+        glVertex2f(18.5f,16.8f);
+
+    glEnd();
 
     glColor3f(0.58f, 0.22f, 0.30f);
 
     glBegin(GL_POLYGON);
 
-        glVertex2f(0,0);
-        glVertex2f(18.5f,15.4f);
-        glVertex2f(23.8f,10.8f);
-        glVertex2f(5.3f,-4.6f);
-
-    glEnd();
-
-    glColor3f(0.44f, 0.15f, 0.22f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(0,0);
-        glVertex2f(5.3f,-4.6f);
-        glVertex2f(5.3f,-5.8f);
-        glVertex2f(0,-1.2f);
-
-    glEnd();
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(5.3f,-4.6f);
-        glVertex2f(23.8f,10.8f);
-        glVertex2f(23.8f,9.6f);
-        glVertex2f(5.3f,-5.8f);
+        glVertex2f(0,2.6f);
+        glVertex2f(5.3f,-2.0f);
+        glVertex2f(23.8f,13.4f);
+        glVertex2f(18.5f,18.0f);
 
     glEnd();
 
@@ -2741,10 +2954,10 @@ void patineta()
 
     glBegin(GL_POLYGON);
 
-        glVertex2f(7.4f,4.0f);
-        glVertex2f(14.6f,10.0f);
-        glVertex2f(16.4f,8.4f);
-        glVertex2f(9.2f,2.4f);
+        glVertex2f(7.4f,5.0f);
+        glVertex2f(9.6f,3.0f);
+        glVertex2f(16.4f,8.8f);
+        glVertex2f(14.2f,10.8f);
 
     glEnd();
 }
