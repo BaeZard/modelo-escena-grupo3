@@ -2350,24 +2350,90 @@ void librosExtra()
 void pelotaFutbol()
 {
     glPushMatrix();
-    glTranslatef(0.4f, 1.0f, 0.0f);
-    glScalef(1.0f, 0.40f, 1.0f);
-    glColor3f(0.60f, 0.34f, 0.22f);
-    circuloRelleno(0.0f, 0.0f, 4.4f, 20);
+    glTranslatef(0.8f, 0.5f, 0.0f);
+    glScalef(1.0f, 0.26f, 1.0f);
+    glColor3f(0.54f, 0.29f, 0.19f);
+    circuloRelleno(0.0f, 0.0f, 3.0f, 20);
+    glPopMatrix();
+    glPushMatrix();
+    glScalef(1.0f, 2.0f, 1.0f);
+
+
+    glColor3f(0.60f, 0.61f, 0.67f);
+    circuloRelleno(0.0f, 3.9f, 3.9f, 30);
+
+    glColor3f(0.97f, 0.98f, 1.0f);
+    circuloRelleno(0.3f, 4.2f, 3.6f, 30);
+
+    glColor3f(0.62f, 0.63f, 0.69f);
+    glLineWidth(1.5);
+
+    glBegin(GL_LINES);
+
+        glVertex2f(1.4f,5.5f);
+        glVertex2f(2.3f,7.0f);
+
+        glVertex2f(-1.0f,5.5f);
+        glVertex2f(-2.1f,6.8f);
+
+        glVertex2f(-1.5f,3.6f);
+        glVertex2f(-3.0f,3.2f);
+
+        glVertex2f(0.3f,2.6f);
+        glVertex2f(0.3f,1.0f);
+
+        glVertex2f(1.9f,3.6f);
+        glVertex2f(3.4f,3.1f);
+
+    glEnd();
+
+    glColor3f(0.18f, 0.18f, 0.23f);
+    circuloRelleno(0.3f, 4.2f, 1.35f, 5);
+
+    glPushMatrix();
+    glTranslatef(0.3f, 6.9f, 0.0f);
+    glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+    glScalef(0.50f, 1.0f, 1.0f);
+    glColor3f(0.21f, 0.21f, 0.26f);
+    circuloRelleno(0.0f, 0.0f, 1.25f, 5);
     glPopMatrix();
 
-    glColor3f(0.76f, 0.77f, 0.82f);
-    circuloRelleno(0.0f, 4.6f, 4.2f, 28);
+    glPushMatrix();
+    glTranslatef(-2.3f, 5.0f, 0.0f);
+    glRotatef(162.0f, 0.0f, 0.0f, 1.0f);
+    glScalef(0.50f, 1.0f, 1.0f);
+    glColor3f(0.13f, 0.13f, 0.18f);
+    circuloRelleno(0.0f, 0.0f, 1.25f, 5);
+    glPopMatrix();
 
-    glColor3f(0.98f, 0.98f, 1.0f);
-    circuloRelleno(0.5f, 5.1f, 3.6f, 28);
+    glPushMatrix();
+    glTranslatef(-1.3f, 2.1f, 0.0f);
+    glRotatef(234.0f, 0.0f, 0.0f, 1.0f);
+    glScalef(0.50f, 1.0f, 1.0f);
+    glColor3f(0.11f, 0.11f, 0.15f);
+    circuloRelleno(0.0f, 0.0f, 1.2f, 5);
+    glPopMatrix();
 
-    glColor3f(0.16f, 0.16f, 0.20f);
-    circuloRelleno(0.4f, 5.2f, 1.5f, 5);
-    circuloRelleno(-2.3f, 6.8f, 0.9f, 5);
-    circuloRelleno(3.2f, 6.4f, 0.85f, 5);
-    circuloRelleno(-2.5f, 3.0f, 0.8f, 5);
-    circuloRelleno(2.6f, 2.6f, 0.75f, 5);
+    glPushMatrix();
+    glTranslatef(1.9f, 2.1f, 0.0f);
+    glRotatef(306.0f, 0.0f, 0.0f, 1.0f);
+    glScalef(0.50f, 1.0f, 1.0f);
+    glColor3f(0.13f, 0.13f, 0.18f);
+    circuloRelleno(0.0f, 0.0f, 1.2f, 5);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(2.9f, 5.0f, 0.0f);
+    glRotatef(18.0f, 0.0f, 0.0f, 1.0f);
+    glScalef(0.50f, 1.0f, 1.0f);
+    glColor3f(0.19f, 0.19f, 0.24f);
+    circuloRelleno(0.0f, 0.0f, 1.25f, 5);
+    glPopMatrix();
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+    circuloRelleno(1.6f, 6.2f, 0.7f, 12);
+
+    glPopMatrix();
 }
 
 //Jhon - Tacho pequeno
