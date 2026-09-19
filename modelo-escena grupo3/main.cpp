@@ -110,6 +110,8 @@ void portarretrato(void);
 //FORMAS Y OBJETOS DE JHON SIESQUEN
 //Pelota de futbol
 void pelotaFutbol(void);
+//Tacho pequeno
+void tachoPequeno(void);
 //Par de medias
 void parMedias(void);
 //Zapatillas
@@ -211,6 +213,13 @@ void dibujar()
     glScalef(0.5f, 0.5f, 1.0f);
     relojPared();
     glPopMatrix();
+    
+    //Jhon - Tacho pequeno
+	glPushMatrix();
+	glTranslatef(-53.0f, -22.0f, 0.0f);
+	glScalef(1.9f, 1.9f, 1.0f);
+	tachoPequeno();
+	glPopMatrix();
 
 	//BELEN - Mesita
 	glPushMatrix();
@@ -3379,4 +3388,73 @@ void patineta()
     glEnd();
 }
 
+//Jhon - Tacho de ropa
+void tachoPequeno()
+{
+    glColor3f(0.24f, 0.29f, 0.36f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0,0);
+        glVertex2f(4,-3.4f);
+        glVertex2f(4,-12.4f);
+        glVertex2f(0.8f,-9.6f);
+
+    glEnd();
+
+    glColor3f(0.36f, 0.42f, 0.50f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(4,-3.4f);
+        glVertex2f(8,0);
+        glVertex2f(7.2f,-9.6f);
+        glVertex2f(4,-12.4f);
+
+    glEnd();
+
+    glColor3f(0.46f, 0.53f, 0.61f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(5.4f,-4.6f);
+        glVertex2f(6.4f,-3.8f);
+        glVertex2f(5.9f,-9.4f);
+        glVertex2f(4.9f,-10.2f);
+
+    glEnd();
+
+    glColor3f(0.54f, 0.61f, 0.68f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0,0);
+        glVertex2f(4,3.4f);
+        glVertex2f(8,0);
+        glVertex2f(4,-3.4f);
+
+    glEnd();
+
+    glColor3f(0.13f, 0.15f, 0.19f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(1.3f,0);
+        glVertex2f(4,2.3f);
+        glVertex2f(6.7f,0);
+        glVertex2f(4,-2.3f);
+
+    glEnd();
+
+    glColor3f(0.95f, 0.95f, 0.98f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(2.8f,0.5f);
+        glVertex2f(3.7f,1.9f);
+        glVertex2f(5.2f,1.1f);
+        glVertex2f(4.3f,-0.3f);
+
+    glEnd();
+}
 
