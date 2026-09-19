@@ -67,14 +67,29 @@ void quad2f(float x1, float y1, float x2, float y2, float x3, float y3, float x4
 
 //--------------------------------------
 //FORMAS Y OBJETOS DE CARLOS ZAMORA
+//FORMAS Y OBJETOS DE CARLOS ZAMORA
 //FOCO PARED DERECHA
 void apliquePared(void);
 //CUADRO DE PARED
 void cuadroPared(void);
-//CARLOS
+//CORTINA
 void cortina(void);
-//CARLOS
+//JARDINERA
 void jardinera(void);
+//LUNA Y ESTRELLAS
+void lunaEstrellas(void);
+//FRANJAS DE PARED
+void franjasPared(void);
+//PERCHA DE PARED
+void perchaPared(void);
+//GUIRNALDA CON LUCES
+void guirnaldaLuces(void);
+//TOMACORRIENTE DE PARED
+void tomacorrientePared(void);
+//GUIRNALDA DE FOTOS DERECHA
+void guirnaldaFotosDerecha(void);
+//INTERRUPTOR EN PARED IZQUIERDA
+void interruptorParedIzquierda(void);
 
 //--------------------------------------
 //FORMAS Y OBJETOS SOBRE LA CAMA DE MIGUEL ROA
@@ -229,6 +244,13 @@ void dibujar()
 	glScalef(0.7f, 0.8f, 1.0f);
 	tacho();
 	glPopMatrix();
+	
+	// CARLOS: Guirnalda de fotos en la pared derecha
+    glPushMatrix();
+    glTranslatef(6.0f, 21.0f, 1.0f);
+    glScalef(0.7f, 0.7f, 1.0f);
+    guirnaldaFotosDerecha();
+    glPopMatrix();
 
 	//BELEN - PC de Escritorio
 	glPushMatrix();
@@ -277,6 +299,37 @@ void dibujar()
 	glTranslatef(32.0f, -19.0f, 1.0f);
 	cuadroPared();
 	glPopMatrix();
+	
+	//CARLOS: "Luna y estrellas sobre el cuadro blanco"
+	glPushMatrix();
+	lunaEstrellas();
+	glPopMatrix();
+	
+	//CARLOS: "Franjas decorativas pastel debajo de la luna"
+	glPushMatrix();
+	franjasPared();
+	glPopMatrix();
+	
+	//CARLOS: "Percha con bufanda entre la ventana y el cuadro de montañas"
+	glPushMatrix();
+	perchaPared();
+	glPopMatrix();
+	
+
+	//CARLOS: "Guirnalda de luces arriba de la varilla de la cortina"
+	glPushMatrix();
+	guirnaldaLuces();
+	glPopMatrix();
+	
+	// CARLOS: "Tomacorriente en la pared derecha"
+	glPushMatrix();
+	tomacorrientePared();
+	glPopMatrix();
+    
+    // CARLOS: Interruptor de luz en la pared izquierda
+    glPushMatrix();
+    interruptorParedIzquierda();
+    glPopMatrix();
 	
 	//BELEN - Mesa de Noche
 	glPushMatrix();
@@ -1382,6 +1435,285 @@ void cortina()
     glVertex2f(38, 81);
     glVertex2f(4, 99);
 
+    glEnd();
+}
+
+//LUNA Y ESTRELLAS - CARLOS 
+void lunaEstrellas()
+{
+    // Luna creciente: círculo dorado + círculo blanco que la "muerde"
+    glColor3f(0.90f, 0.75f, 0.35f);
+    circuloRelleno(75.0f, 44.0f, 4.3f, 24);
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+    circuloRelleno(76.4f, 45.5f, 3.7f, 24);
+
+    // Estrella 1 (rombo, la más grande)
+    glColor3f(0.90f, 0.75f, 0.35f);
+    glBegin(GL_POLYGON);
+        glVertex2f(66.0f, 43.5f);
+        glVertex2f(67.5f, 42.0f);
+        glVertex2f(66.0f, 40.5f);
+        glVertex2f(64.5f, 42.0f);
+    glEnd();
+
+    // Estrella 2 (rombo chico)
+    glBegin(GL_POLYGON);
+        glVertex2f(68.0f, 31.0f);
+        glVertex2f(69.0f, 30.0f);
+        glVertex2f(68.0f, 29.0f);
+        glVertex2f(67.0f, 30.0f);
+    glEnd();
+
+    // Estrella 3 (rombo chico)
+    glBegin(GL_POLYGON);
+        glVertex2f(77.0f, 27.0f);
+        glVertex2f(78.0f, 26.0f);
+        glVertex2f(77.0f, 25.0f);
+        glVertex2f(76.0f, 26.0f);
+    glEnd();
+}
+//FRANJAS DECORATIVAS - CARLOS
+
+void franjasPared()
+{
+    glColor3f(0.95f, 0.75f, 0.82f);
+    glBegin(GL_POLYGON);
+        glVertex2f(69.64f, 20.16f);
+        glVertex2f(70.50f, 19.63f);
+        glVertex2f(71.70f, 37.63f);
+        glVertex2f(70.84f, 38.16f);
+    glEnd();
+
+    glColor3f(0.75f, 0.85f, 0.95f);
+    glBegin(GL_POLYGON);
+        glVertex2f(71.08f, 19.28f);
+        glVertex2f(71.94f, 18.75f);
+        glVertex2f(73.14f, 36.75f);
+        glVertex2f(72.28f, 37.28f);
+    glEnd();
+}
+
+// CARLOS - Percha en la pared derecha (entre ventana y cuadro)
+void perchaPared()
+{
+    // Base pegada a la pared derecha
+    glColor3f(0.30f, 0.30f, 0.32f);
+    glBegin(GL_POLYGON);
+        glVertex2f(63.0f, 65.0f);
+        glVertex2f(65.0f, 63.8f);
+        glVertex2f(65.0f, 62.0f);
+        glVertex2f(63.0f, 63.2f);
+    glEnd();
+
+    // Gancho
+    glColor3f(0.25f, 0.25f, 0.28f);
+    glBegin(GL_POLYGON);
+        glVertex2f(63.8f, 64.2f);
+        glVertex2f(64.8f, 63.6f);
+        glVertex2f(65.2f, 62.6f);
+        glVertex2f(64.5f, 62.2f);
+    glEnd();
+
+    // Cuerpo de la bufanda (caída isométrica)
+    glColor3f(0.55f, 0.20f, 0.45f);
+    glBegin(GL_POLYGON);
+        glVertex2f(63.8f, 62.5f);
+        glVertex2f(64.8f, 62.0f);
+        glVertex2f(65.5f, 53.0f);
+        glVertex2f(64.5f, 53.5f);
+    glEnd();
+
+    // Doblez final
+    glColor3f(0.48f, 0.16f, 0.38f);
+    glBegin(GL_POLYGON);
+        glVertex2f(64.5f, 53.5f);
+        glVertex2f(65.5f, 53.0f);
+        glVertex2f(65.3f, 50.5f);
+        glVertex2f(64.3f, 51.0f);
+    glEnd();
+
+    // Rayas decorativas
+    glColor3f(0.92f, 0.88f, 0.65f);
+    glLineWidth(1.5f);
+    glBegin(GL_LINES);
+        glVertex2f(64.0f, 60.0f); glVertex2f(64.9f, 59.5f);
+        glVertex2f(64.3f, 57.0f); glVertex2f(65.2f, 56.5f);
+        glVertex2f(64.5f, 54.0f); glVertex2f(65.4f, 53.5f);
+    glEnd();
+}
+// CARLOS 
+void guirnaldaLuces()
+{
+    // Cable de la guirnalda con caída suave
+    glColor3f(0.30f, 0.28f, 0.25f);
+    glLineWidth(1.5f);
+    glBegin(GL_LINE_STRIP);
+        glVertex2f(4.0f,  96.5f);
+        glVertex2f(8.0f,  90.0f);
+        glVertex2f(13.0f, 85.5f);
+        glVertex2f(18.0f, 82.5f);
+        glVertex2f(23.0f, 81.0f);
+        glVertex2f(28.0f, 81.0f);
+        glVertex2f(33.0f, 82.0f);
+        glVertex2f(38.0f, 79.0f);
+    glEnd();
+
+    // Foquitos con colores alternados
+    glPointSize(7.0f);
+    glBegin(GL_POINTS);
+        // Foquito 1 - Amarillo
+        glColor3f(0.98f, 0.85f, 0.25f); glVertex2f(4.0f, 96.5f);
+        // Foquito 2 - Naranja
+        glColor3f(0.95f, 0.55f, 0.20f); glVertex2f(8.0f, 90.0f);
+        // Foquito 3 - Rosado / Rojo
+        glColor3f(0.90f, 0.35f, 0.45f); glVertex2f(13.0f, 85.5f);
+        // Foquito 4 - Amarillo
+        glColor3f(0.98f, 0.85f, 0.25f); glVertex2f(18.0f, 82.5f);
+        // Foquito 5 - Azul claro
+        glColor3f(0.35f, 0.75f, 0.95f); glVertex2f(23.0f, 81.0f);
+        // Foquito 6 - Naranja
+        glColor3f(0.95f, 0.55f, 0.20f); glVertex2f(28.0f, 81.0f);
+        // Foquito 7 - Rosado
+        glColor3f(0.90f, 0.35f, 0.45f); glVertex2f(33.0f, 82.0f);
+        // Foquito 8 - Amarillo
+        glColor3f(0.98f, 0.85f, 0.25f); glVertex2f(38.0f, 79.0f);
+    glEnd();
+}
+
+// CARLOS
+void tomacorrientePared()
+{
+    // Placa externa adaptada al ángulo del muro
+    glColor3f(0.92f, 0.92f, 0.90f);
+    glBegin(GL_POLYGON);
+        glVertex2f(68.0f, 15.0f);
+        glVertex2f(72.0f, 12.5f);
+        glVertex2f(72.0f, 17.5f);
+        glVertex2f(68.0f, 20.0f);
+    glEnd();
+
+    // Borde de relieve
+    glColor3f(0.70f, 0.70f, 0.68f);
+    glLineWidth(1.5f);
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(68.0f, 15.0f);
+        glVertex2f(72.0f, 12.5f);
+        glVertex2f(72.0f, 17.5f);
+        glVertex2f(68.0f, 20.0f);
+    glEnd();
+
+    // Orificios
+    glPointSize(3.5f);
+    glColor3f(0.20f, 0.20f, 0.20f);
+    glBegin(GL_POINTS);
+        // Enchufe superior
+        glVertex2f(69.3f, 17.5f);
+        glVertex2f(70.7f, 16.6f);
+        // Enchufe inferior
+        glVertex2f(69.3f, 15.5f);
+        glVertex2f(70.7f, 14.6f);
+    glEnd();
+}
+
+// CARLOS
+void guirnaldaFotosDerecha()
+{
+    // 1. Hilo que cuelga debajo de la repisa
+    glColor3f(0.35f, 0.35f, 0.35f);
+    glLineWidth(1.5f);
+    glBegin(GL_LINE_STRIP);
+        glVertex2f(-5.0f, 62.0f);
+        glVertex2f( 5.0f, 57.5f); // Caída suave
+        glVertex2f(15.0f, 59.0f);
+    glEnd();
+
+    // 2. Foto Polaroid 1 (Izquierda)
+    // Papel blanco
+    glColor3f(0.95f, 0.95f, 0.95f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-2.0f, 60.0f);
+        glVertex2f( 1.5f, 61.5f);
+        glVertex2f( 1.5f, 55.5f);
+        glVertex2f(-2.0f, 54.0f);
+    glEnd();
+    // Imagen interna (Azul/Cielo)
+    glColor3f(0.40f, 0.65f, 0.85f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-1.6f, 59.4f);
+        glVertex2f( 1.1f, 60.5f);
+        glVertex2f( 1.1f, 57.0f);
+        glVertex2f(-1.6f, 55.9f);
+    glEnd();
+    // Ganchito
+    glColor3f(0.70f, 0.50f, 0.30f);
+    glPointSize(4.0f);
+    glBegin(GL_POINTS);
+        glVertex2f(-0.2f, 59.5f);
+    glEnd();
+
+    // 3. Foto Polaroid 2 (Derecha)
+    // Papel blanco
+    glColor3f(0.95f, 0.95f, 0.95f);
+    glBegin(GL_POLYGON);
+        glVertex2f( 7.0f, 58.5f);
+        glVertex2f(10.5f, 60.0f);
+        glVertex2f(10.5f, 54.0f);
+        glVertex2f( 7.0f, 52.5f);
+    glEnd();
+    // Imagen interna (Atardecer)
+    glColor3f(0.90f, 0.50f, 0.35f);
+    glBegin(GL_POLYGON);
+        glVertex2f( 7.4f, 57.9f);
+        glVertex2f(10.1f, 59.0f);
+        glVertex2f(10.1f, 55.5f);
+        glVertex2f( 7.4f, 54.4f);
+    glEnd();
+    // Ganchito
+    glColor3f(0.70f, 0.50f, 0.30f);
+    glPointSize(4.0f);
+    glBegin(GL_POINTS);
+        glVertex2f( 8.7f, 58.0f);
+    glEnd();
+}
+
+// CARLOS 
+void interruptorParedIzquierda()
+{
+    // Placa plástica blanca
+    glColor3f(0.92f, 0.92f, 0.90f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-28.0f, 28.0f);
+        glVertex2f(-25.0f, 30.0f);
+        glVertex2f(-25.0f, 35.0f);
+        glVertex2f(-28.0f, 33.0f);
+    glEnd();
+
+    // Borde de relieve / Sombra
+    glColor3f(0.75f, 0.75f, 0.72f);
+    glLineWidth(1.5f);
+    glBegin(GL_LINE_LOOP);
+        glVertex2f(-28.0f, 28.0f);
+        glVertex2f(-25.0f, 30.0f);
+        glVertex2f(-25.0f, 35.0f);
+        glVertex2f(-28.0f, 33.0f);
+    glEnd();
+
+    // Botón interno
+    glColor3f(0.80f, 0.80f, 0.80f);
+    glBegin(GL_POLYGON);
+        glVertex2f(-27.0f, 30.0f);
+        glVertex2f(-26.0f, 30.7f);
+        glVertex2f(-26.0f, 33.7f);
+        glVertex2f(-27.0f, 33.0f);
+    glEnd();
+
+    // Línea divisoria del botón
+    glColor3f(0.50f, 0.50f, 0.50f);
+    glLineWidth(1.0f);
+    glBegin(GL_LINES);
+        glVertex2f(-27.0f, 31.5f);
+        glVertex2f(-26.0f, 32.2f);
     glEnd();
 }
 
