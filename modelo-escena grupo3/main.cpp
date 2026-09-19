@@ -2222,42 +2222,23 @@ void librosExtra()
     // Sombra
     glColor3f(0.55f, 0.32f, 0.18f);
 
-    quad2f(
-        -4, 73,
-        8, 78,
-        9, 76,
-        -3, 71
-    );
+    quad2f(-4, 73,8, 78,9, 76,3, 71);
 
     // Libro azul
     glColor3f(0.18f, 0.35f, 0.70f);
 
-    quad2f(
-        -4, 73,
-        5, 77,
-        5, 79,
-        -4, 75
+    quad2f(-4, 73,5, 77,5, 79,-4, 75
     );
 
     // Libro verde
     glColor3f(0.25f, 0.55f, 0.35f);
 
-    quad2f(
-        -3, 75,
-        6, 79,
-        6, 81,
-        -3, 77
-    );
+    quad2f(-3, 75,6, 79,6, 81,-3, 77);
 
     // Libro rojo
     glColor3f(0.72f, 0.25f, 0.25f);
 
-    quad2f(
-        -2, 77,
-        7, 81,
-        7, 83,
-        -2, 79
-    );
+    quad2f(-2, 77, 7, 81, 7, 83, -2, 79);
 
     // Líneas de páginas
     glColor3f(0.95f, 0.90f, 0.72f);
