@@ -110,8 +110,6 @@ void portarretrato(void);
 //FORMAS Y OBJETOS DE JHON SIESQUEN
 //Pelota de futbol
 void pelotaFutbol(void);
-//Tacho pequeno
-void tachoPequeno(void);
 //Par de medias
 void parMedias(void);
 //Zapatillas
@@ -454,13 +452,6 @@ void dibujar()
 	glTranslatef(2.0f, -76.0f, 0.0f);
 	glScalef(0.9f, 0.9f, 1.0f);
 	patineta();
-	glPopMatrix();
-
-	//Jhon - Tacho pequeno
-	glPushMatrix();
-	glTranslatef(-11.0f, -38.0f, 0.0f);
-	glScalef(0.9f, 0.9f, 1.0f);
-	tachoPequeno();
 	glPopMatrix();
 
 	//Jhon - Banco de madera
@@ -2720,21 +2711,6 @@ void sombrasJhon()
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(-11.0f, -38.0f, 0.0f);
-    glScalef(0.9f, 0.9f, 1.0f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(0.2f,-12.6f);
-        glVertex2f(4.0f,-15.6f);
-        glVertex2f(8.4f,-12.0f);
-        glVertex2f(4.6f,-9.0f);
-
-    glEnd();
-
-    glPopMatrix();
-
-    glPushMatrix();
     glTranslatef(-14.0f, -60.0f, 0.0f);
     glScalef(0.9f, 0.9f, 1.0f);
 
@@ -2846,76 +2822,6 @@ void pelotaFutbol()
     circuloRelleno(1.6f, 6.2f, 0.7f, 12);
 
     glPopMatrix();
-}
-
-//Jhon - Tacho pequeno
-void tachoPequeno()
-{
-    glColor3f(0.24f, 0.29f, 0.36f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(0,0);
-        glVertex2f(4,-3.4f);
-        glVertex2f(4,-12.4f);
-        glVertex2f(0.8f,-9.6f);
-
-    glEnd();
-
-    glColor3f(0.36f, 0.42f, 0.50f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(4,-3.4f);
-        glVertex2f(8,0);
-        glVertex2f(7.2f,-9.6f);
-        glVertex2f(4,-12.4f);
-
-    glEnd();
-
-    glColor3f(0.46f, 0.53f, 0.61f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(5.4f,-4.6f);
-        glVertex2f(6.4f,-3.8f);
-        glVertex2f(5.9f,-9.4f);
-        glVertex2f(4.9f,-10.2f);
-
-    glEnd();
-
-    glColor3f(0.54f, 0.61f, 0.68f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(0,0);
-        glVertex2f(4,3.4f);
-        glVertex2f(8,0);
-        glVertex2f(4,-3.4f);
-
-    glEnd();
-
-    glColor3f(0.13f, 0.15f, 0.19f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(1.3f,0);
-        glVertex2f(4,2.3f);
-        glVertex2f(6.7f,0);
-        glVertex2f(4,-2.3f);
-
-    glEnd();
-
-    glColor3f(0.95f, 0.95f, 0.98f);
-
-    glBegin(GL_POLYGON);
-
-        glVertex2f(2.8f,0.5f);
-        glVertex2f(3.7f,1.9f);
-        glVertex2f(5.2f,1.1f);
-        glVertex2f(4.3f,-0.3f);
-
-    glEnd();
 }
 
 //Jhon - Una media
