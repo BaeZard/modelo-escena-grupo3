@@ -34,6 +34,11 @@ void pc(void);
 void mesaNoche(void);
 //LAMPARA
 void lampara(void);
+//SILLA DE ESCRITORIO
+void silla(void);
+//MOUSE DE PC
+void mousePC(void);
+
 
 //--------------------------------------
 //FORMAS Y OBJETOS DE YESSICA BERNALOA
@@ -110,6 +115,8 @@ void portarretrato(void);
 //FORMAS Y OBJETOS DE JHON SIESQUEN
 //Pelota de futbol
 void pelotaFutbol(void);
+//Tacho pequeno
+void tachoPequeno(void);
 //Par de medias
 void parMedias(void);
 //Zapatillas
@@ -211,6 +218,13 @@ void dibujar()
     glScalef(0.5f, 0.5f, 1.0f);
     relojPared();
     glPopMatrix();
+    
+    //Jhon - Tacho pequeno
+	glPushMatrix();
+	glTranslatef(-53.0f, -22.0f, 0.0f);
+	glScalef(1.9f, 1.9f, 1.0f);
+	tachoPequeno();
+	glPopMatrix();
 
 	//BELEN - Mesita
 	glPushMatrix();
@@ -273,6 +287,11 @@ void dibujar()
     glScalef(0.7f, 0.7f, 1.0f);
     guirnaldaFotosDerecha();
     glPopMatrix();
+    
+    //BELEN - Ventana
+	glPushMatrix();
+	ventana();
+	glPopMatrix();
 
 	//BELEN - PC de Escritorio
 	glPushMatrix();
@@ -280,11 +299,21 @@ void dibujar()
 	glScalef(0.9f, 0.9f, 1.0f);
 	pc();
 	glPopMatrix();
-
-	//BELEN - Ventana
+	
+	//BELEN - Silla de Escritorio
 	glPushMatrix();
-	ventana();
+	glTranslatef(17.0f, 25.0f, 0.0f);
+	glScalef(1.8f, 1.9f, 1.0f);
+	silla();
 	glPopMatrix();
+	
+	//BELEN - Mouse de Escritorio
+	glPushMatrix();
+	glTranslatef(-5.0f, 24.0f, 1.0f);
+	glScalef(1.8f, 1.8f, 1.0f);
+	mousePC();
+	glPopMatrix();
+
 	
 	//YESSICA - libros parados
     glPushMatrix();
@@ -925,6 +954,67 @@ void pc(){
     
 }
 
+//Mouse PC - Belen
+void mousePC()
+{
+    // Cuerpo
+    glColor3f(0.15f, 0.15f, 0.15f);
+
+    glBegin(GL_POLYGON);
+        glVertex2f(0,0);
+        glVertex2f(2,1);
+        glVertex2f(3,0);
+        glVertex2f(1,-1);
+    glEnd();
+
+    // División central
+    glColor3f(0.5f,0.5f,0.5f);
+    glBegin(GL_LINES);
+        glVertex2f(1.5f,1);
+        glVertex2f(1.5f,-0.5f);
+    glEnd();
+}
+
+//Silla de escritorio - Belen
+void silla()
+{
+    // Respaldo
+    glColor3f(0.18f,0.18f,0.20f);
+
+    glBegin(GL_POLYGON);
+        glVertex2f(2,10);
+        glVertex2f(8,13);
+        glVertex2f(8,0);
+        glVertex2f(2,-3);
+    glEnd();
+
+    // Asiento
+    glColor3f(0.12f,0.12f,0.15f);
+
+    glBegin(GL_POLYGON);
+        glVertex2f(-2,0);
+        glVertex2f(4,3);
+        glVertex2f(8,0);
+        glVertex2f(2,-4);
+    glEnd();
+
+    // Base
+    glColor3f(0.35f,0.35f,0.35f);
+
+    glBegin(GL_LINES);
+        glVertex2f(2,-4);
+        glVertex2f(2,-12);
+    glEnd();
+
+    glBegin(GL_LINES);
+        glVertex2f(-1,-11);
+        glVertex2f(5,-13);
+
+        glVertex2f(5,-11);
+        glVertex2f(-1,-13);
+    glEnd();
+}
+
 //PATAS DE ESCRITORIO - Belen
 void patasEscritorio(){
 	
@@ -1264,76 +1354,6 @@ void mesaNoche()
 	glEnd();
     
 }
-/*
-//Repisa - Yessica
-void repisa()
-{
-    //SOMBRA PROYECTADA EN LA PARED
-    glColor3f(0.68f, 0.67f, 0.58f);
-    glBegin(GL_POLYGON);
-        glVertex2f(-32, 63);
-        glVertex2f(20, 84);
-        glVertex2f(38, 78);
-        glVertex2f(38, 82);
-        glVertex2f(20, 89);
-        glVertex2f(-32, 68);
-    glEnd();
-
-    //SOPORTES DE MADERA
-    glColor3f(0.50f, 0.22f, 0.10f);
-
-    //Soporte Izquierdo
-    glBegin(GL_TRIANGLES);
-        glVertex2f(-22, 72);
-        glVertex2f(-17, 74.0f);
-        glVertex2f(-22, 65);
-    glEnd();
-
-    //Soporte Derecho
-    glBegin(GL_TRIANGLES);
-        glVertex2f(28, 84);
-        glVertex2f(34, 82.5f);
-        glVertex2f(32, 78);
-    glEnd();
-
-    //TABLA SUPERIOR
-    glColor3f(0.82f, 0.52f, 0.32f);
-
-    //Tramo Pared Izquierda
-    glBegin(GL_POLYGON);
-        glVertex2f(-31, 76);
-        glVertex2f(20, 97);
-        glVertex2f(20, 91);
-        glVertex2f(-22, 72);
-    glEnd();
-
-    //Tramo Pared Derecha
-    glBegin(GL_POLYGON);
-        glVertex2f(20, 97);
-        glVertex2f(36, 88);
-        glVertex2f(32, 80);
-        glVertex2f(20, 91);
-    glEnd();
-
-    //CANTO FRONTAL Y GROSOR
-    glColor3f(0.60f, 0.32f, 0.18f);
-
-    // Canto tramo izquierdo
-    glBegin(GL_POLYGON);
-        glVertex2f(-22, 72);
-        glVertex2f(20, 91);
-        glVertex2f(20, 88);
-        glVertex2f(-22, 69);
-    glEnd();
-
-    //Canto tramo derecho
-    glBegin(GL_POLYGON);
-        glVertex2f(20, 91);
-        glVertex2f(32, 83);
-        glVertex2f(32, 80);
-        glVertex2f(20, 88);
-    glEnd();
-}*/
 
 //JARDINERA - CARLOS
 void jardinera()
@@ -3379,4 +3399,73 @@ void patineta()
     glEnd();
 }
 
+//Jhon - Tacho de ropa
+void tachoPequeno()
+{
+    glColor3f(0.24f, 0.29f, 0.36f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0,0);
+        glVertex2f(4,-3.4f);
+        glVertex2f(4,-12.4f);
+        glVertex2f(0.8f,-9.6f);
+
+    glEnd();
+
+    glColor3f(0.36f, 0.42f, 0.50f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(4,-3.4f);
+        glVertex2f(8,0);
+        glVertex2f(7.2f,-9.6f);
+        glVertex2f(4,-12.4f);
+
+    glEnd();
+
+    glColor3f(0.46f, 0.53f, 0.61f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(5.4f,-4.6f);
+        glVertex2f(6.4f,-3.8f);
+        glVertex2f(5.9f,-9.4f);
+        glVertex2f(4.9f,-10.2f);
+
+    glEnd();
+
+    glColor3f(0.54f, 0.61f, 0.68f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(0,0);
+        glVertex2f(4,3.4f);
+        glVertex2f(8,0);
+        glVertex2f(4,-3.4f);
+
+    glEnd();
+
+    glColor3f(0.13f, 0.15f, 0.19f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(1.3f,0);
+        glVertex2f(4,2.3f);
+        glVertex2f(6.7f,0);
+        glVertex2f(4,-2.3f);
+
+    glEnd();
+
+    glColor3f(0.95f, 0.95f, 0.98f);
+
+    glBegin(GL_POLYGON);
+
+        glVertex2f(2.8f,0.5f);
+        glVertex2f(3.7f,1.9f);
+        glVertex2f(5.2f,1.1f);
+        glVertex2f(4.3f,-0.3f);
+
+    glEnd();
+}
 
