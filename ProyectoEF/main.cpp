@@ -446,7 +446,7 @@ void cuadro(){
         0.75f, 0.85f, 0.55f);
 }
 
-// GATO - BELEN
+// GATO SOBRE CAMA - BELEN
 void gato()
 {
     // Cuerpo
