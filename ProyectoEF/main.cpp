@@ -6,25 +6,25 @@
 // DORMITORIO 3D 
 //
 // CONTROLES:
-// Flecha izquierda/derecha = girar la c�mara
-// Flecha arriba/abajo      = subir/bajar la c�mara
+// Flecha izquierda/derecha = girar la cámara
+// Flecha arriba/abajo      = subir/bajar la cámara
 // W / S                    = acercar / alejar
 // A / D                    = mover la vista
-// R                        = restaurar c�mara
+// R                        = restaurar cámara
 // ESC                      = salir
 // ============================================================
 
-//Posici�n de la c�mara en el espacio 3D
+//Posición de la cámara en el espacio 3D
 float camX = 18.0f, camY = 14.0f, camZ = 20.0f;
 float targetX = 0.0f, targetY = 2.0f, targetZ = -1.0f;
-//�ngulo de rotaci�n horizontal de la c�mara
+//Ángulo de rotación horizontal de la cámara
 float angleY = 0.0f;
 //Control de zoom
 float zoom = 1.0f;
 
-//Rotaci�n del gato mediante el mouse
+//Rotación del gato mediante el mouse
 float rotGato = 0.0f;
-//Posici�n anterior del mouse
+//Posición anterior del mouse
 int mouseX, mouseY;
 
 void setColor(float r, float g, float b){ 
@@ -32,7 +32,7 @@ void setColor(float r, float g, float b){
 }
 
 // ============================================================
-// FUNCI�N PARA CREAR CAJAS 3D
+// FUNCIÓN PARA CREAR CAJAS 3D
 // Se utiliza para paredes, muebles, cama, puerta, etc.
 // ============================================================
 void box(float x, float y, float z, float sx, float sy, float sz,
@@ -47,7 +47,7 @@ void box(float x, float y, float z, float sx, float sy, float sz,
 
 
 // ============================================================
-// FUNCI�N PARA CREAR ESFERAS
+// FUNCIÓN PARA CREAR ESFERAS
 // Se utiliza para pelotas, adornos y detalles decorativos.
 // ============================================================
 void cylinder(float x, float y, float z, float radius, float height,
@@ -69,7 +69,7 @@ void cylinder(float x, float y, float z, float radius, float height,
 }
 
 // ============================================================
-// FUNCI�N PARA CREAR ESFERAS
+// FUNCIÓN PARA CREAR ESFERAS
 // Se utiliza para pelotas, adornos y detalles decorativos.
 // ============================================================
 void sphere(float x, float y, float z, float radius,
@@ -111,7 +111,7 @@ void paredes(){
     box(-10.0f, 4.5f, 0, 0.25f, 9.0f, 18.0f,
         0.80f, 0.80f, 0.68f);
 
-    // Z�calos
+    // Zócalos
     box(0, 0.20f, -8.82f, 20.0f, 0.40f, 0.15f,
         0.30f, 0.18f, 0.10f);
 
@@ -201,11 +201,11 @@ void cama(){
     box(5.2f, 0.45f, -3.8f, 7.2f, 0.9f, 8.8f,
         0.34f, 0.16f, 0.08f);
 
-    // Colch�n
+    // Colchón
     box(5.2f, 1.05f, -3.8f, 6.9f, 0.75f, 8.5f,
         0.95f, 0.38f, 0.42f);
 
-    // S�bana
+    // Sábana
     box(5.2f, 1.48f, -3.0f, 6.5f, 0.18f, 5.8f,
         0.94f, 0.45f, 0.48f);
 
@@ -220,7 +220,7 @@ void cama(){
 }
 
 // ------------------------------------------------------------
-// MESA DE NOCHE Y L�MPARA - JHON SIESQUEN
+// MESA DE NOCHE Y LÁMPARA - JHON SIESQUEN
 void mesaNoche(){
     box(0.15f, 1.25f, -6.65f, 2.2f, 2.5f, 2.0f,
         0.34f, 0.15f, 0.07f);
@@ -250,7 +250,7 @@ void lampara(){
     glutSolidCone(0.55, 0.75, 24, 12);
     glPopMatrix();
 
-    // Foco de la l�mpara
+    // Foco de la lámpara
     sphere(0.15f, 4.02f, -6.65f, 0.18f,
            1.0f, 0.85f, 0.35f);
 }
@@ -380,7 +380,7 @@ void alfombra(){
 }
 
 // ------------------------------------------------------------
-// C�MODA (AHORA ENTRA PERFECTAMENTE EN LA PARED AMPLIADA) - BELEN CHAVEZ
+// CÓMODA (AHORA ENTRA PERFECTAMENTE EN LA PARED AMPLIADA) - BELEN CHAVEZ
 void comoda(){
     box(-8.60f, 1.35f, 5.2f, 2.4f, 2.7f, 4.0f,
         0.48f, 0.22f, 0.10f);
@@ -541,7 +541,7 @@ void room(){
 
 //============================================================
 //RENDERIZADO DE LA ESCENA
-//Configura la c�mara y dibuja todos los objetos.
+//Configura la cámara y dibuja todos los objetos.
 void display(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -564,27 +564,30 @@ void display(){
     glutSwapBuffers();
 }
 
-//AJUSTE DE LA PERSPECTIVA AL CAMBIAR EL TAMA�O DE LA VENTANA
+//AJUSTE DE LA PERSPECTIVA AL CAMBIAR EL TAMAÑO DE LA VENTANA
+// ------------------------------------------------------------
+// RESHAPE 
+// ------------------------------------------------------------
 void reshape(int w, int h){
-    if(h == 0) h = 1;
+    if (h == 0) h = 1; // Evita división entre cero
 
+    // 1. El área de dibujo ocupa todo el tamaño de la ventana
     glViewport(0, 0, w, h);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    gluPerspective(
-        55.0,
-        (double)w / (double)h,
-        0.1,
-        100.0
-    );
+    // 2. ASPECTO FIJO (1.0): 
+    // Al mantenerlo fijo y no usar (double)w / (double)h, 
+    // la imagen se deformará/estirará al ritmo que muevas el mouse.
+    gluPerspective(55.0, 1.2, 0.1, 100.0);
 
     glMatrixMode(GL_MODELVIEW);
+    glutPostRedisplay();
 }
 
 // CONTROL DEL TECLADO
-// Permite zoom, desplazamiento y reinicio de c�mara.
+// Permite zoom, desplazamiento y reinicio de cámara.
 void keyboard(unsigned char key, int, int){
     if(key == 27)
         exit(0);
@@ -621,7 +624,7 @@ void keyboard(unsigned char key, int, int){
 }
 
 //CONTROL DE LAS FLECHAS DEL TECLADO
-//Permite rotar y mover la c�mara verticalmente.
+//Permite rotar y mover la cámara verticalmente.
 void special(int key, int, int){
     if(key == GLUT_KEY_LEFT)
         angleY -= 5.0f;
@@ -641,7 +644,7 @@ void special(int key, int, int){
     glutPostRedisplay();
 }
 
-//REGISTRA LA POSICI�N INICIAL DEL MOUSE
+//REGISTRA LA POSICIÓN INICIAL DEL MOUSE
 void onMouse(int button, int state, int x, int y)
 {
     if(button == GLUT_LEFT_BUTTON &&
@@ -652,7 +655,7 @@ void onMouse(int button, int state, int x, int y)
     }
 }
 
-//ROTACI�N DEL GATO CON EL MOVIMIENTO DEL MOUSE
+//ROTACIÓN DEL GATO CON EL MOVIMIENTO DEL MOUSE
 void onMotion(int x, int y)
 {
     rotGato += (x - mouseX);
