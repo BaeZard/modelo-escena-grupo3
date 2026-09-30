@@ -36,8 +36,6 @@ void mesaNoche(void);
 void lampara(void);
 //SILLA DE ESCRITORIO
 void silla(void);
-//MOUSE DE PC
-void mousePC(void);
 
 
 //--------------------------------------
@@ -110,6 +108,8 @@ void celular(void);
 void lentes(void);
 //PORTARETRATO
 void portarretrato(void);
+//MOUSE DE PC
+void mousePC(void);
 
 //--------------------------------------
 //FORMAS Y OBJETOS DE JHON SIESQUEN
@@ -307,7 +307,7 @@ void dibujar()
 	silla();
 	glPopMatrix();
 	
-	//BELEN - Mouse de Escritorio
+	//MIGUEL ROA - Mouse de Escritorio
 	glPushMatrix();
 	glTranslatef(-5.0f, 24.0f, 1.0f);
 	glScalef(1.8f, 1.8f, 1.0f);
@@ -952,27 +952,6 @@ void pc(){
 
     glEnd();
     
-}
-
-//Mouse PC - Belen
-void mousePC()
-{
-    // Cuerpo
-    glColor3f(0.15f, 0.15f, 0.15f);
-
-    glBegin(GL_POLYGON);
-        glVertex2f(0,0);
-        glVertex2f(2,1);
-        glVertex2f(3,0);
-        glVertex2f(1,-1);
-    glEnd();
-
-    // División central
-    glColor3f(0.5f,0.5f,0.5f);
-    glBegin(GL_LINES);
-        glVertex2f(1.5f,1);
-        glVertex2f(1.5f,-0.5f);
-    glEnd();
 }
 
 //Silla de escritorio - Belen
@@ -1956,6 +1935,26 @@ void circulo(float cx, float cy, float r)
     glEnd();
 }
 
+//Mouse PC - MIGUEL ROA
+void mousePC()
+{
+    // Cuerpo
+    glColor3f(0.15f, 0.15f, 0.15f);
+
+    glBegin(GL_POLYGON);
+        glVertex2f(0,0);
+        glVertex2f(2,1);
+        glVertex2f(3,0);
+        glVertex2f(1,-1);
+    glEnd();
+
+    // División central
+    glColor3f(0.5f,0.5f,0.5f);
+    glBegin(GL_LINES);
+        glVertex2f(1.5f,1);
+        glVertex2f(1.5f,-0.5f);
+    glEnd();
+}
 
 //PELUCHE -  MIGUEL ROA
 void peluche()
@@ -2011,7 +2010,7 @@ void peluche()
     glEnd();
 }
 
-// CELULAR - MIGUEL ROA
+//CELULAR - MIGUEL ROA
 void celular() {
     // Pantalla
     glColor3f(0.05f, 0.05f, 0.05f); 
