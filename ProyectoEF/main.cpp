@@ -245,11 +245,13 @@ void lampara(){
 
     glPushMatrix();
     glTranslatef(0.15f, 4.0f, -6.65f);
-    setColor(0.95f, 0.75f, 0.30f);
+    glRotatef(-90.0f, 1.0f, 0.0f, 0.0f);
+	setColor(0.95f, 0.75f, 0.30f);
     glutSolidCone(0.55, 0.75, 24, 12);
     glPopMatrix();
 
-    sphere(0.15f, 4.05f, -6.65f, 0.18f,
+    // Foco de la lámpara
+    sphere(0.15f, 4.02f, -6.65f, 0.18f,
            1.0f, 0.85f, 0.35f);
 }
 
@@ -368,7 +370,7 @@ void reloj(){
 }
 
 // ------------------------------------------------------------
-// ALFOMBRA - BELEN CHAVEZ
+// ALFOMBRA - YESSICA BERNALOA
 void alfombra(){
     box(-1.8f, 0.08f, -1.2f, 5.5f, 0.10f, 4.0f,
         0.75f, 0.30f, 0.20f);
