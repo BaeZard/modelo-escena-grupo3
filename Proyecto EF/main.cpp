@@ -14,15 +14,27 @@
 // ESC                      = salir
 // ============================================================
 
+//Posición de la cámara en el espacio 3D
 float camX = 18.0f, camY = 14.0f, camZ = 20.0f;
 float targetX = 0.0f, targetY = 2.0f, targetZ = -1.0f;
+//Ángulo de rotación horizontal de la cámara
 float angleY = 0.0f;
+//Control de zoom
 float zoom = 1.0f;
+
+//Rotación del gato mediante el mouse
+float rotGato = 0.0f;
+//Posición anterior del mouse
+int mouseX, mouseY;
 
 void setColor(float r, float g, float b){ 
     glColor3f(r, g, b); 
 }
 
+// ============================================================
+// FUNCIÓN PARA CREAR CAJAS 3D
+// Se utiliza para paredes, muebles, cama, puerta, etc.
+// ============================================================
 void box(float x, float y, float z, float sx, float sy, float sz,
          float r, float g, float b){
     glPushMatrix();
@@ -33,6 +45,11 @@ void box(float x, float y, float z, float sx, float sy, float sz,
     glPopMatrix();
 }
 
+
+// ============================================================
+// FUNCIÓN PARA CREAR ESFERAS
+// Se utiliza para pelotas, adornos y detalles decorativos.
+// ============================================================
 void cylinder(float x, float y, float z, float radius, float height,
               float r, float g, float b, int slices = 24){
     glPushMatrix();
@@ -51,6 +68,10 @@ void cylinder(float x, float y, float z, float radius, float height,
     glPopMatrix();
 }
 
+// ============================================================
+// FUNCIÓN PARA CREAR ESFERAS
+// Se utiliza para pelotas, adornos y detalles decorativos.
+// ============================================================
 void sphere(float x, float y, float z, float radius,
             float r, float g, float b){
     glPushMatrix();
@@ -61,9 +82,8 @@ void sphere(float x, float y, float z, float radius,
 }
 
 // ------------------------------------------------------------
-// PISO 
-// ------------------------------------------------------------
-void floorRoom(){
+// PISO - BELEN CHAVEZ
+void piso(){
     box(0, -0.25f, 0, 20.0f, 0.5f, 18.0f,
         0.45f, 0.25f, 0.12f);
 
@@ -81,9 +101,8 @@ void floorRoom(){
 }
 
 // ------------------------------------------------------------
-// PAREDES 
-// ------------------------------------------------------------
-void walls(){
+// PAREDES - BELEN CHAVEZ
+void paredes(){
     // Pared posterior
     box(0, 4.5f, -9.0f, 20.0f, 9.0f, 0.25f,
         0.84f, 0.84f, 0.72f);
@@ -101,9 +120,8 @@ void walls(){
 }
 
 // ------------------------------------------------------------
-// PUERTA
-// ------------------------------------------------------------
-void door(){
+// PUERTA - BELEN CHAVEZ
+void puerta(){
     box(-9.80f, 3.6f, -3.5f, 0.12f, 6.5f, 3.2f,
         0.33f, 0.18f, 0.08f);
 
@@ -115,9 +133,8 @@ void door(){
 }
 
 // ------------------------------------------------------------
-// ESPEJO
-// ------------------------------------------------------------
-void mirror(){
+// ESPEJO - YESSICA BERNALOA
+void espejo(){
     box(-9.68f, 4.0f, 1.2f, 0.10f, 4.4f, 2.5f,
         0.30f, 0.16f, 0.07f);
 
@@ -130,9 +147,8 @@ void mirror(){
 }
 
 // ------------------------------------------------------------
-// VENTANA Y CORTINAS
-// ------------------------------------------------------------
-void windowRoom(){
+// VENTANA Y CORTINAS - CARLOS ZAMORA
+void ventana(){
     box(5.2f, 4.4f, -8.82f, 5.8f, 4.5f, 0.18f,
         0.30f, 0.18f, 0.08f);
 
@@ -167,19 +183,20 @@ void windowRoom(){
 }
 
 // ------------------------------------------------------------
-// CAMA 
-// ------------------------------------------------------------
-void headboard(){
+// CAMA - BELEN CHAVEZ
+void cabecera(){
     box(5.2f, 2.1f, -7.0f, 6.8f, 3.0f, 0.45f,
         0.38f, 0.16f, 0.09f);
 }
 
-void pillow(float x, float z){
+// ALMOHADA - MIGUEL ROA
+
+void almohada(float x, float z){
     box(x, 1.95f, z, 2.0f, 0.35f, 1.2f,
         0.93f, 0.93f, 0.88f);
 }
-
-void bed(){
+// CAMA - MIGUEL ROA
+void cama(){
     // Base
     box(5.2f, 0.45f, -3.8f, 7.2f, 0.9f, 8.8f,
         0.34f, 0.16f, 0.08f);
@@ -196,16 +213,15 @@ void bed(){
     box(5.2f, 1.62f, -0.35f, 5.9f, 0.20f, 2.0f,
         0.20f, 0.38f, 0.62f);
 
-    pillow(3.2f, -6.35f);
-    pillow(7.2f, -6.35f);
+    almohada(3.2f, -6.35f);
+    almohada(7.2f, -6.35f);
 
-    headboard();
+    cabecera();
 }
 
 // ------------------------------------------------------------
-// MESA DE NOCHE Y LÁMPARA 
-// ------------------------------------------------------------
-void nightstand(){
+// MESA DE NOCHE Y LÁMPARA - JHON SIESQUEN
+void mesaNoche(){
     box(0.15f, 1.25f, -6.65f, 2.2f, 2.5f, 2.0f,
         0.34f, 0.15f, 0.07f);
 
@@ -222,7 +238,8 @@ void nightstand(){
     }
 }
 
-void lamp(){
+// lAMPARA - MIGUEL ROA
+void lampara(){
     cylinder(0.15f, 2.75f, -6.65f, 0.08f, 1.4f,
              0.30f, 0.18f, 0.08f);
 
@@ -237,9 +254,8 @@ void lamp(){
 }
 
 // ------------------------------------------------------------
-// ESCRITORIO Y COMPUTADORA
-// ------------------------------------------------------------
-void desk(){
+// ESCRITORIO Y COMPUTADORA - JHON SIESQUEN
+void escritorio(){
     box(-3.8f, 2.15f, -6.7f, 5.0f, 0.35f, 2.0f,
         0.45f, 0.20f, 0.09f);
 
@@ -267,7 +283,8 @@ void desk(){
         0.70f, 0.70f, 0.68f);
 }
 
-void chair(){
+// SILLA - MIGUEL ROA
+void silla(){
     box(-3.8f, 1.7f, -3.8f, 2.1f, 0.35f, 2.1f,
         0.07f, 0.08f, 0.11f);
 
@@ -279,9 +296,8 @@ void chair(){
 }
 
 // ------------------------------------------------------------
-// REPISA Y DECORACION
-// ------------------------------------------------------------
-void shelf(){
+// REPISA Y DECORACION - CARLOS ZAMORA
+void repisa(){
     box(-3.8f, 6.6f, -8.55f, 6.5f, 0.35f, 1.0f,
         0.38f, 0.18f, 0.08f);
 
@@ -328,9 +344,8 @@ void shelf(){
 }
 
 // ------------------------------------------------------------
-// RELOJ
-// ------------------------------------------------------------
-void clockWall(){
+// RELOJ - YESSICA BERNALOA
+void reloj(){
     glPushMatrix();
     glTranslatef(-8.2f, 6.0f, -8.65f);
 
@@ -353,9 +368,8 @@ void clockWall(){
 }
 
 // ------------------------------------------------------------
-// ALFOMBRA
-// ------------------------------------------------------------
-void rug(){
+// ALFOMBRA - BELEN CHAVEZ
+void alfombra(){
     box(-1.8f, 0.08f, -1.2f, 5.5f, 0.10f, 4.0f,
         0.75f, 0.30f, 0.20f);
 
@@ -364,9 +378,8 @@ void rug(){
 }
 
 // ------------------------------------------------------------
-// CÓMODA (AHORA ENTRA PERFECTAMENTE EN LA PARED AMPLIADA)
-// ------------------------------------------------------------
-void dresser(){
+// CÓMODA (AHORA ENTRA PERFECTAMENTE EN LA PARED AMPLIADA) - BELEN CHAVEZ
+void comoda(){
     box(-8.60f, 1.35f, 5.2f, 2.4f, 2.7f, 4.0f,
         0.48f, 0.22f, 0.10f);
 
@@ -381,9 +394,8 @@ void dresser(){
 }
 
 // ------------------------------------------------------------
-// PELOTA 
-// ------------------------------------------------------------
-void ball(){
+// PELOTA - JHON SIESQUEN
+void pelota(){
     sphere(0.5f, 0.65f, -0.1f, 0.60f,
            0.95f, 0.95f, 0.95f);
 
@@ -395,8 +407,7 @@ void ball(){
 }
 
 // ------------------------------------------------------------
-// SKATEBOARD
-// ------------------------------------------------------------
+// SKATEBOARD - JHON SIESQUEN
 void skateboard(){
     box(1.0f, 0.60f, 2.2f, 3.0f, 0.15f, 0.55f,
         0.35f, 0.08f, 0.18f);
@@ -409,9 +420,8 @@ void skateboard(){
 }
 
 // ------------------------------------------------------------
-// PLANTA
-// ------------------------------------------------------------
-void plant(){
+// PLANTA - YESSICA BERNALOA
+void planta(){
     cylinder(7.8f, 0.35f, 3.0f, 0.55f, 0.8f,
              0.60f, 0.25f, 0.12f);
 
@@ -427,9 +437,8 @@ void plant(){
 }
 
 // ------------------------------------------------------------
-// CUADRO DECORATIVO 
-// ------------------------------------------------------------
-void picture(){
+// CUADRO DECORATIVO - CARLOS ZAMORA
+void cuadro(){
     box(1.0f, 6.0f, -8.65f, 2.0f, 1.5f, 0.12f,
         0.30f, 0.18f, 0.08f);
 
@@ -437,35 +446,100 @@ void picture(){
         0.75f, 0.85f, 0.55f);
 }
 
+// GATO - BELEN
+void gato()
+{
+    // Cuerpo
+    setColor(1.0f, 0.70f, 0.35f);
+    glPushMatrix();
+    glScalef(1.0f, 0.8f, 1.5f);
+    glutSolidSphere(0.5, 20, 20);
+    glPopMatrix();
+
+    // Cabeza
+    setColor(1.0f, 0.70f, 0.35f);// naranja suave
+    glPushMatrix();
+    glTranslatef(0.0f, 0.3f, 0.8f);
+    glutSolidSphere(0.3, 20, 20);
+    glPopMatrix();
+
+    // Oreja izquierda
+    setColor(0.80f, 0.65f, 0.15f);
+    glPushMatrix();
+    glTranslatef(-0.15f, 0.55f, 0.8f);
+    glutSolidCone(0.08, 0.2, 10, 10);
+    glPopMatrix();
+
+    // Oreja derecha
+    glPushMatrix();
+    glTranslatef(0.15f, 0.55f, 0.8f);
+    glutSolidCone(0.08, 0.2, 10, 10);
+    glPopMatrix();
+    
+	// Ojos verdes
+	setColor(0.3f, 1.0f, 0.2f);
+	
+	// Ojo izquierdo
+	glPushMatrix();
+	glTranslatef(-0.10f, 0.38f, 1.12f);
+	glutSolidSphere(0.05f, 10, 10);
+	glPopMatrix();
+	
+	// Ojo derecho
+	glPushMatrix();
+	glTranslatef(0.10f, 0.38f, 1.12f);
+	glutSolidSphere(0.05f, 10, 10);
+	glPopMatrix();
+	
+    // Cola
+    setColor(0.95f, 0.50f, 0.10f);
+    glPushMatrix();
+    glTranslatef(0.0f, 0.1f, -0.75f);
+    glRotatef(-45, 1, 0, 0);
+
+    GLUquadric* q = gluNewQuadric();
+    gluCylinder(q, 0.05, 0.03, 0.5, 12, 12);
+    gluDeleteQuadric(q);
+
+    glPopMatrix();
+}
+
 // ------------------------------------------------------------
 // ESCENA COMPLETA
 // ------------------------------------------------------------
 void room(){
-    floorRoom();
-    walls();
-    door();
-    mirror();
-    windowRoom();
-    bed();
-    nightstand();
-    lamp();
-    desk();
-    chair();
-    shelf();
-    clockWall();
-    rug();
-    dresser();
-    ball();
+    piso();
+    paredes();
+    puerta();
+    espejo();
+    ventana();
+    cama();
+    
+    // Gato sobre la cama
+	glPushMatrix();
+	glTranslatef(5.2f, 2.0f, -2.5f);
+	glRotatef(rotGato, 0.0f, 1.0f, 0.0f);
+	glScalef(1.2f, 1.2f, 1.2f);
+	gato();
+	glPopMatrix();
+
+    mesaNoche();
+    lampara();
+    escritorio();
+    silla();
+    repisa();
+    reloj();
+    alfombra();
+    comoda();
+    pelota();
     skateboard();
-    plant();
-    picture();
+    planta();
+    cuadro();
 }
 
-
-
-// ------------------------------------------------------------
-// DIBUJADO
-// ------------------------------------------------------------
+//============================================================
+//RENDERIZADO DE LA ESCENA
+//Configura la cámara y dibuja todos los objetos.
 void display(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -488,9 +562,7 @@ void display(){
     glutSwapBuffers();
 }
 
-// ------------------------------------------------------------
-// VENTANA
-// ------------------------------------------------------------
+//AJUSTE DE LA PERSPECTIVA AL CAMBIAR EL TAMAÑO DE LA VENTANA
 void reshape(int w, int h){
     if(h == 0) h = 1;
 
@@ -509,9 +581,8 @@ void reshape(int w, int h){
     glMatrixMode(GL_MODELVIEW);
 }
 
-// ------------------------------------------------------------
-// TECLADO
-// ------------------------------------------------------------
+// CONTROL DEL TECLADO
+// Permite zoom, desplazamiento y reinicio de cámara.
 void keyboard(unsigned char key, int, int){
     if(key == 27)
         exit(0);
@@ -547,9 +618,8 @@ void keyboard(unsigned char key, int, int){
     glutPostRedisplay();
 }
 
-// ------------------------------------------------------------
-// FLECHAS
-// ------------------------------------------------------------
+//CONTROL DE LAS FLECHAS DEL TECLADO
+//Permite rotar y mover la cámara verticalmente.
 void special(int key, int, int){
     if(key == GLUT_KEY_LEFT)
         angleY -= 5.0f;
@@ -569,9 +639,29 @@ void special(int key, int, int){
     glutPostRedisplay();
 }
 
-// ------------------------------------------------------------
-// MAIN
-// ------------------------------------------------------------
+//REGISTRA LA POSICIÓN INICIAL DEL MOUSE
+void onMouse(int button, int state, int x, int y)
+{
+    if(button == GLUT_LEFT_BUTTON &&
+       state == GLUT_DOWN)
+    {
+        mouseX = x;
+        mouseY = y;
+    }
+}
+
+//ROTACIÓN DEL GATO CON EL MOVIMIENTO DEL MOUSE
+void onMotion(int x, int y)
+{
+    rotGato += (x - mouseX);
+
+    mouseX = x;
+    mouseY = y;
+
+    glutPostRedisplay();
+}
+
+//MAIN
 int main(int argc, char** argv){
     glutInit(&argc, argv);
 
@@ -600,6 +690,9 @@ int main(int argc, char** argv){
     glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboard);
     glutSpecialFunc(special);
+    //Funciones para movimiento con mouse
+    glutMouseFunc(onMouse);
+	glutMotionFunc(onMotion);
 
     glutMainLoop();
 
