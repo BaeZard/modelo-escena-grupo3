@@ -6,33 +6,36 @@
 // DORMITORIO 3D 
 //
 // CONTROLES:
-// Flecha izquierda/derecha = girar la c�mara
-// Flecha arriba/abajo      = subir/bajar la c�mara
+// Flecha izquierda/derecha = girar la cámara
+// Flecha arriba/abajo      = subir/bajar la cámara
 // W / S                    = acercar / alejar
 // A / D                    = mover la vista
-// R                        = restaurar c�mara
+// R                        = restaurar cámara
 // ESC                      = salir
 // ============================================================
 
-//Posici�n de la c�mara en el espacio 3D
+//Posición de la cámara en el espacio 3D
 float camX = 18.0f, camY = 14.0f, camZ = 20.0f;
 float targetX = 0.0f, targetY = 2.0f, targetZ = -1.0f;
-//�ngulo de rotaci�n horizontal de la c�mara
+//Ángulo de rotación horizontal de la cámara
 float angleY = 0.0f;
 //Control de zoom
 float zoom = 1.0f;
 
-//Rotaci�n del gato mediante el mouse
+//Rotación del gato mediante el mouse
 float rotGato = 0.0f;
-//Posici�n anterior del mouse
+//Posición anterior del mouse
 int mouseX, mouseY;
+
+//Rotación de la silla con la tecla espacio
+float rotSilla = 0.0f;
 
 void setColor(float r, float g, float b){ 
     glColor3f(r, g, b); 
 }
 
 // ============================================================
-// FUNCI�N PARA CREAR CAJAS 3D
+// FUNCIÓN PARA CREAR CAJAS 3D
 // Se utiliza para paredes, muebles, cama, puerta, etc.
 // ============================================================
 void box(float x, float y, float z, float sx, float sy, float sz,
@@ -47,7 +50,7 @@ void box(float x, float y, float z, float sx, float sy, float sz,
 
 
 // ============================================================
-// FUNCI�N PARA CREAR ESFERAS
+// FUNCIÓN PARA CREAR ESFERAS
 // Se utiliza para pelotas, adornos y detalles decorativos.
 // ============================================================
 void cylinder(float x, float y, float z, float radius, float height,
@@ -69,7 +72,7 @@ void cylinder(float x, float y, float z, float radius, float height,
 }
 
 // ============================================================
-// FUNCI�N PARA CREAR ESFERAS
+// FUNCIÓN PARA CREAR ESFERAS
 // Se utiliza para pelotas, adornos y detalles decorativos.
 // ============================================================
 void sphere(float x, float y, float z, float radius,
@@ -111,7 +114,7 @@ void paredes(){
     box(-10.0f, 4.5f, 0, 0.25f, 9.0f, 18.0f,
         0.80f, 0.80f, 0.68f);
 
-    // Z�calos
+    // Zócalos
     box(0, 0.20f, -8.82f, 20.0f, 0.40f, 0.15f,
         0.30f, 0.18f, 0.10f);
 
@@ -190,38 +193,26 @@ void cabecera(){
 }
 
 // ALMOHADA - MIGUEL ROA
-// ALMOHADA (mullida, compacta) - MIGUEL ROA
 void almohada(float x, float z, float r, float g, float b){
-    glPushMatrix();
-    glTranslatef(x, 1.72f, z);
-
-    // Cuerpo (tono oscuro) y tapa abombada (tono claro)
-    for(int i = 0; i < 2; i++){
-        glPushMatrix();
-        glTranslatef(0, i * 0.10f, 0);
-        glScalef(1.00f - i * 0.22f, 0.28f + i * 0.02f, 0.60f - i * 0.18f);
-        if(i == 0) setColor(r * 0.78f, g * 0.78f, b * 0.78f);
-        else       setColor(r + (1 - r) * 0.3f, g + (1 - g) * 0.3f, b + (1 - b) * 0.3f);
-        glutSolidSphere(1.0, 24, 16);
-        glPopMatrix();
-    }
-
-    // Bot�n central
-    sphere(0, 0.40f, 0, 0.07f, 0.98f, 0.92f, 0.70f);
-
-    glPopMatrix();
+    float y = 1.58f;
+    box(x, y + 0.10f, z, 1.60f, 0.20f, 1.20f, r * 0.7f, g * 0.7f, b * 0.7f);   // BASE
+    box(x, y + 0.25f, z, 1.48f, 0.14f, 1.08f, r, g, b);                        // CUERPO
+    box(x, y + 0.34f, z, 1.25f, 0.06f, 0.85f,
+        r + (1 - r) * 0.35f, g + (1 - g) * 0.35f, b + (1 - b) * 0.35f);        // TAPA CLARA
 }
+
+// ------------------------------------------------------------
 // CAMA - MIGUEL ROA
 void cama(){
     // Base
     box(5.2f, 0.45f, -3.8f, 7.2f, 0.9f, 8.8f,
         0.34f, 0.16f, 0.08f);
 
-    // Colch�n
+    // Colchón
     box(5.2f, 1.05f, -3.8f, 6.9f, 0.75f, 8.5f,
         0.95f, 0.38f, 0.42f);
 
-    // S�bana
+    // Sábana
     box(5.2f, 1.48f, -3.0f, 6.5f, 0.18f, 5.8f,
         0.94f, 0.45f, 0.48f);
 
@@ -229,14 +220,14 @@ void cama(){
     box(5.2f, 1.62f, -0.35f, 5.9f, 0.20f, 2.0f,
         0.20f, 0.38f, 0.62f);
 
-   almohada(3.2f, -6.15f, 0.62f, 0.50f, 0.85f);   // lavanda
-    almohada(7.2f, -6.15f, 0.95f, 0.78f, 0.30f); 
-
+	almohada(3.2f, -6.15f, 0.62f, 0.50f, 0.85f);  
+	almohada(7.2f, -6.15f, 0.95f, 0.78f, 0.30f); 
+	
     cabecera();
 }
 
 // ------------------------------------------------------------
-// MESA DE NOCHE Y L�MPARA - JHON SIESQUEN
+// MESA DE NOCHE Y LÁMPARA - JHON SIESQUEN
 void mesaNoche(){
     box(0.15f, 1.25f, -6.65f, 2.2f, 2.5f, 2.0f,
         0.34f, 0.15f, 0.07f);
@@ -254,6 +245,7 @@ void mesaNoche(){
     }
 }
 
+// ------------------------------------------------------------
 // lAMPARA - MIGUEL ROA
 void lampara(){
     cylinder(0.15f, 2.75f, -6.65f, 0.08f, 1.4f,
@@ -266,7 +258,7 @@ void lampara(){
     glutSolidCone(0.55, 0.75, 24, 12);
     glPopMatrix();
 
-    // Foco de la l�mpara
+    // Foco de la lámpara
     sphere(0.15f, 4.02f, -6.65f, 0.18f,
            1.0f, 0.85f, 0.35f);
 }
@@ -301,16 +293,44 @@ void escritorio(){
         0.70f, 0.70f, 0.68f);
 }
 
+// ------------------------------------------------------------
 // SILLA - MIGUEL ROA
 void silla(){
-    box(-3.8f, 1.7f, -3.8f, 2.1f, 0.35f, 2.1f,
-        0.07f, 0.08f, 0.11f);
+    glPushMatrix();
+    glTranslatef(-3.8f, 0, -3.8f);
+    glRotatef(rotSilla, 0, 1, 0);  
 
-    box(-3.8f, 3.0f, -4.65f, 2.1f, 3.0f, 0.35f,
-        0.06f, 0.07f, 0.10f);
+    // Base de 5 patas con ruedas
+    for(int i = 0; i < 5; i++){
+        glPushMatrix();
+        glRotatef(i * 72.0f, 0, 1, 0);
+        box(0.25f, 0.20f, 0, 0.5f, 0.07f, 0.12f, 0.15f, 0.15f, 0.17f);
+        sphere(0.5f, 0.10f, 0, 0.10f, 0.05f, 0.05f, 0.05f);
+        glPopMatrix();
+    }
 
-    cylinder(-3.8f, 0.25f, -3.8f, 0.13f, 1.3f,
-             0.08f, 0.08f, 0.08f);
+    // Pistón y mecanismo
+    cylinder(0, 0.20f, 0, 0.07f, 1.0f, 0.55f, 0.55f, 0.58f);
+    cylinder(0, 1.20f, 0, 0.11f, 0.32f, 0.12f, 0.12f, 0.14f);
+    box(0, 1.55f, 0, 0.5f, 0.10f, 0.5f, 0.12f, 0.12f, 0.14f);
+
+    // Asiento
+    box(0, 1.70f, 0, 2.0f, 0.25f, 2.0f, 0.07f, 0.08f, 0.11f);
+    box(0, 1.88f, 0, 1.9f, 0.12f, 1.9f, 0.12f, 0.14f, 0.20f);
+    box(0, 1.945f, 0, 1.2f, 0.01f, 1.5f, 0.18f, 0.20f, 0.28f);
+
+    // Respaldo
+    box(0, 2.30f, 0.95f, 0.3f, 0.9f, 0.12f, 0.15f, 0.15f, 0.17f);
+    box(0, 3.30f, 1.05f, 1.9f, 1.9f, 0.22f, 0.12f, 0.14f, 0.20f);
+    box(0, 3.30f, 0.93f, 1.5f, 1.5f, 0.04f, 0.15f, 0.35f, 0.60f);
+
+    // Reposabrazos
+    for(int s = -1; s <= 1; s += 2){
+        box(s * 1.05f, 2.20f, 0.30f, 0.12f, 0.80f, 0.12f, 0.15f, 0.15f, 0.17f);
+        box(s * 1.05f, 2.65f, -0.10f, 0.22f, 0.10f, 1.2f, 0.07f, 0.08f, 0.11f);
+    }
+
+    glPopMatrix();
 }
 
 // ------------------------------------------------------------
@@ -396,7 +416,7 @@ void alfombra(){
 }
 
 // ------------------------------------------------------------
-// C�MODA (AHORA ENTRA PERFECTAMENTE EN LA PARED AMPLIADA) - BELEN CHAVEZ
+// CÓMODA (AHORA ENTRA PERFECTAMENTE EN LA PARED AMPLIADA) - BELEN CHAVEZ
 void comoda(){
     box(-8.60f, 1.35f, 5.2f, 2.4f, 2.7f, 4.0f,
         0.48f, 0.22f, 0.10f);
@@ -523,6 +543,352 @@ void gato()
 }
 
 // ------------------------------------------------------------
+// LIBRO CERRADO - MIGUEL ROA
+void libro(float x, float y, float z, float rot,
+           float w, float d, float r, float g, float b){
+    glPushMatrix();
+    glTranslatef(x, y, z);
+    glRotatef(rot, 0, 1, 0);
+
+    // Tapa inferior y superior
+    box(0, 0.015f, 0, w, 0.03f, d, r, g, b);
+    box(0, 0.155f, 0, w, 0.03f, d, r, g, b);
+
+    // Lomo
+    box(-w / 2 + 0.03f, 0.085f, 0, 0.06f, 0.17f, d,
+        r * 0.7f, g * 0.7f, b * 0.7f);
+
+    // Hojas
+    box(0.02f, 0.085f, 0, w - 0.08f, 0.14f, d - 0.06f,
+        0.96f, 0.94f, 0.85f);
+
+    glPopMatrix();
+}
+
+// ------------------------------------------------------------
+// PELUCHE (OSO) - MIGUEL ROA
+void peluche(float x, float z, float rot){
+    float y0 = 1.57f;   // altura de la sábana
+
+    glPushMatrix();
+    glTranslatef(x, 0, z);
+    glRotatef(rot, 0, 1, 0);
+
+    // Cuerpo y barriga
+    sphere(0, y0 + 0.45f, 0, 0.45f, 0.72f, 0.46f, 0.25f);
+    sphere(0, y0 + 0.42f, 0.28f, 0.28f, 0.90f, 0.75f, 0.55f);
+
+    // Piernas
+    sphere(-0.28f, y0 + 0.22f, 0.35f, 0.22f, 0.60f, 0.36f, 0.18f);
+    sphere( 0.28f, y0 + 0.22f, 0.35f, 0.22f, 0.60f, 0.36f, 0.18f);
+
+    // Brazos
+    sphere(-0.50f, y0 + 0.58f, 0.12f, 0.16f, 0.60f, 0.36f, 0.18f);
+    sphere( 0.50f, y0 + 0.58f, 0.12f, 0.16f, 0.60f, 0.36f, 0.18f);
+
+    // Cabeza
+    sphere(0, y0 + 1.12f, 0, 0.33f, 0.78f, 0.52f, 0.30f);
+
+    // Orejas
+    sphere(-0.24f, y0 + 1.42f, 0, 0.12f, 0.60f, 0.36f, 0.18f);
+    sphere( 0.24f, y0 + 1.42f, 0, 0.12f, 0.60f, 0.36f, 0.18f);
+
+    // Hocico y nariz
+    sphere(0, y0 + 1.05f, 0.30f, 0.13f, 0.92f, 0.80f, 0.62f);
+    sphere(0, y0 + 1.10f, 0.41f, 0.05f, 0.08f, 0.05f, 0.05f);
+
+    // Ojos
+    sphere(-0.12f, y0 + 1.19f, 0.29f, 0.04f, 0.05f, 0.05f, 0.05f);
+    sphere( 0.12f, y0 + 1.19f, 0.29f, 0.04f, 0.05f, 0.05f, 0.05f);
+
+    // Moño
+    box(-0.12f, y0 + 0.80f, 0.30f, 0.16f, 0.12f, 0.06f, 0.85f, 0.15f, 0.20f);
+    box( 0.12f, y0 + 0.80f, 0.30f, 0.16f, 0.12f, 0.06f, 0.85f, 0.15f, 0.20f);
+    sphere(0, y0 + 0.80f, 0.31f, 0.06f, 0.65f, 0.08f, 0.12f);
+
+    glPopMatrix();
+}
+
+// ------------------------------------------------------------
+// MANTA DOBLADA CON RAYAS - MIGUEL ROA
+void manta(float x, float z, float rot){
+    glPushMatrix();
+    glTranslatef(x, 1.72f, z);     // 1.72 = parte de arriba de la cobija
+    glRotatef(rot, 0, 1, 0);
+
+    // Tres capas dobladas (se ven en el borde)
+    box(0.00f, 0.045f, 0, 2.00f, 0.09f, 1.20f, 0.88f, 0.40f, 0.38f);  // coral
+    box(0.03f, 0.135f, 0, 1.98f, 0.09f, 1.18f, 0.96f, 0.92f, 0.80f);  // crema
+    box(0.00f, 0.225f, 0, 2.00f, 0.09f, 1.20f, 0.93f, 0.72f, 0.25f);  // mostaza
+
+    // Rayas sobre la capa de arriba
+    for(int i = 0; i < 5; i++){
+        if(i % 2 == 0)
+            box(-0.8f + i * 0.4f, 0.275f, 0, 0.20f, 0.01f, 1.18f,
+                0.88f, 0.40f, 0.38f);   // coral
+        else
+            box(-0.8f + i * 0.4f, 0.275f, 0, 0.20f, 0.01f, 1.18f,
+                0.96f, 0.92f, 0.80f);   // crema
+    }
+
+    glPopMatrix();
+}
+
+
+// ------------------------------------------------------------
+// CELULAR - MIGUEL ROA
+void celular(float x, float z, float rot){
+    float y0 = 1.57f; 
+
+    glPushMatrix();
+    glTranslatef(x, y0, z);
+    glRotatef(rot, 0, 1, 0);
+
+    // Cuerpo 
+    box(0, 0.02f, 0, 0.46f, 0.04f, 0.86f,
+        0.12f, 0.12f, 0.15f);
+
+    // Pantalla encendida
+    box(0, 0.045f, 0, 0.40f, 0.01f, 0.78f,
+        0.25f, 0.55f, 0.85f);
+
+    // Cámara frontal
+    box(0, 0.052f, -0.35f, 0.14f, 0.01f, 0.02f,
+        0.05f, 0.05f, 0.07f);
+
+    // Reloj en la pantalla
+    box(0, 0.052f, -0.18f, 0.22f, 0.01f, 0.07f,
+        0.95f, 0.97f, 1.00f);
+
+    // Notificaciones
+    box(0, 0.052f, 0.02f, 0.30f, 0.01f, 0.05f,
+        0.75f, 0.88f, 0.98f);
+    box(0, 0.052f, 0.12f, 0.30f, 0.01f, 0.05f,
+        0.75f, 0.88f, 0.98f);
+
+    // Iconos de aplicaciones
+    for(int i = 0; i < 3; i++){
+        box(-0.12f + i * 0.12f, 0.052f, 0.28f, 0.08f, 0.01f, 0.08f,
+            0.95f - i * 0.30f, 0.45f + i * 0.20f, 0.30f + i * 0.25f);
+    }
+
+    // Barra inferior
+    box(0, 0.052f, 0.36f, 0.12f, 0.01f, 0.015f,
+        1.00f, 1.00f, 1.00f);
+
+    glPopMatrix();
+}
+
+// ------------------------------------------------------------
+// OBJETOS SOBRE LA CAMA - MIGUEL ROA
+void decoracionCama(){
+    // Peluche junto a la almohada derecha
+    peluche(7.4f, -4.9f, 25.0f);
+
+    // Pila de libros en el lado izquierdo
+    libro(3.1f, 1.57f, -4.0f,  0.0f, 1.10f, 0.80f, 0.15f, 0.30f, 0.65f);
+    libro(3.1f, 1.74f, -4.0f, 15.0f, 0.95f, 0.70f, 0.75f, 0.20f, 0.20f);
+
+    manta(3.8f, -0.3f, 15.0f); 
+    celular(7.0f, -2.8f, -20.0f);
+}
+
+
+// ------------------------------------------------------------
+// LIBROS TIRADOS EN EL PISO - MIGUEL ROA
+void librosPiso(){
+    float yPiso = 0.02f;   // altura del piso
+
+    // Pila de dos libros
+    libro(5.2f, yPiso,         3.2f,  20.0f, 1.30f, 0.95f, 0.20f, 0.50f, 0.30f);
+    libro(5.2f, yPiso + 0.17f, 3.2f, -15.0f, 1.00f, 0.75f, 0.85f, 0.65f, 0.20f);
+
+    // Libro suelto
+    libro(6.3f, yPiso, 4.8f, -40.0f, 1.20f, 0.90f, 0.70f, 0.20f, 0.25f);
+}
+
+
+
+// LENTES - MIGUEL ROA
+void lentes(){
+    float yMesa = 2.67f;   // altura de la tapa de la mesa de noche
+
+    glPushMatrix();
+    glTranslatef(0.65f, yMesa + 0.135f, -5.95f);
+    glRotatef(25, 0, 1, 0);      // girados hacia la cámara
+    glRotatef(-22.5f, 1, 0, 0);  // cristales inclinados hacia atrás
+    glScalef(0.6f, 0.6f, 0.6f);  // tamaño de los lentes
+
+    for(int s = -1; s <= 1; s += 2){
+        float cx = s * 0.28f;   // centro de cada luna
+
+        // Marco cuadrado (4 barras)
+        box(cx,         0.20f, 0, 0.45f, 0.05f, 0.06f, 0.08f, 0.08f, 0.10f);  // arriba
+        box(cx,        -0.20f, 0, 0.45f, 0.05f, 0.06f, 0.08f, 0.08f, 0.10f);  // abajo
+        box(cx - 0.20f, 0,     0, 0.05f, 0.35f, 0.06f, 0.08f, 0.08f, 0.10f);  // izquierda
+        box(cx + 0.20f, 0,     0, 0.05f, 0.35f, 0.06f, 0.08f, 0.08f, 0.10f);  // derecha
+
+        box(cx, 0, 0, 0.36f, 0.36f, 0.02f, 0.70f, 0.88f, 0.98f);                       // luna cuadrada
+        sphere(s * 0.52f, 0.12f, -0.01f, 0.04f, 0.90f, 0.72f, 0.20f);                  // bisagra dorada
+        box(s * 0.52f, 0.12f, -0.38f, 0.03f, 0.03f, 0.76f, 0.08f, 0.08f, 0.10f);       // patilla
+        box(s * 0.52f, 0.12f, -0.70f, 0.04f, 0.04f, 0.16f, 0.55f, 0.20f, 0.12f);       // punta de la patilla
+        sphere(s * 0.11f, -0.10f, 0.04f, 0.03f, 0.85f, 0.85f, 0.88f);                  // plaquita de la nariz
+    }
+
+    box(0, 0.12f, 0, 0.16f, 0.04f, 0.05f, 0.08f, 0.08f, 0.10f);                        // puente
+    glPopMatrix();
+}
+
+// CILINDRO (GUITARRA Y MOCHILA) - MIGUEL ROA
+void cilindroZ(float x, float y, float z, float radius, float depth,
+            float r, float g, float b){
+    glPushMatrix();
+    glTranslatef(x, y, z - depth / 2);
+    setColor(r, g, b);
+
+    GLUquadric* q = gluNewQuadric();
+    gluCylinder(q, radius, radius, depth, 32, 1);
+    gluDisk(q, 0, radius, 32, 1);
+
+    glTranslatef(0, 0, depth);
+    gluDisk(q, 0, radius, 32, 1);
+    gluDeleteQuadric(q);
+
+    glPopMatrix();
+}
+// GUITARRA - MIGUEL ROA
+void guitarra(float x, float z, float yaw){
+    glPushMatrix();
+    glTranslatef(x, 0.06f, z);
+    glRotatef(yaw, 0, 1, 0);       
+    glRotatef(-10, 1, 0, 0);       
+	glScalef(0.8f, 0.8f, 0.8f);
+
+    // ---------- CUERPO ----------
+    cilindroZ(0, 0.95f, 0, 0.95f, 0.50f, 0.40f, 0.12f, 0.06f); 
+    cilindroZ(0, 2.00f, 0, 0.70f, 0.50f, 0.40f, 0.12f, 0.06f);  
+
+    // ---------- TAPA----------
+    cilindroZ(0, 0.95f, 0.26f, 0.89f, 0.02f, 0.93f, 0.62f, 0.22f);
+    cilindroZ(0, 2.00f, 0.26f, 0.64f, 0.02f, 0.93f, 0.62f, 0.22f);
+
+    // ---------- BOCA ----------
+    cilindroZ(0, 1.95f, 0.275f, 0.28f, 0.01f, 0.05f, 0.03f, 0.02f);
+    glPushMatrix();
+    glTranslatef(0, 1.95f, 0.28f);
+    setColor(0.30f, 0.14f, 0.05f);
+    glutSolidTorus(0.025, 0.31, 8, 32);
+    glPopMatrix();
+
+    // ---------- PUENTE ----------
+    box(0, 0.55f, 0.30f, 0.70f, 0.14f, 0.06f,
+        0.15f, 0.08f, 0.04f);
+
+    // ---------- MÁSTIL ----------
+    box(0, 3.15f, 0.0f, 0.26f, 1.70f, 0.18f,
+        0.55f, 0.30f, 0.12f);
+
+    // Diapasón
+    box(0, 3.22f, 0.11f, 0.24f, 1.45f, 0.04f,
+        0.10f, 0.06f, 0.04f);
+
+    // Trastes
+    float trastes[5] = {2.95f, 3.20f, 3.42f, 3.62f, 3.80f};
+    for(int i = 0; i < 5; i++){
+        box(0, trastes[i], 0.135f, 0.25f, 0.015f, 0.015f,
+            0.80f, 0.80f, 0.75f);
+    }
+
+    // Cejuela
+    box(0, 3.96f, 0.13f, 0.26f, 0.04f, 0.05f,
+        0.92f, 0.90f, 0.82f);
+
+    // ---------- CLAVIJERO ----------
+    box(0, 4.20f, 0.0f, 0.36f, 0.50f, 0.12f,
+        0.20f, 0.10f, 0.05f);
+
+    box(0, 4.25f, 0.065f, 0.14f, 0.14f, 0.01f,
+        0.90f, 0.80f, 0.50f);
+
+    // Clavijas
+    for(int i = 0; i < 3; i++){
+        sphere(-0.23f, 4.07f + i * 0.13f, 0, 0.045f, 0.85f, 0.78f, 0.40f);
+        sphere( 0.23f, 4.07f + i * 0.13f, 0, 0.045f, 0.85f, 0.78f, 0.40f);
+    }
+
+    // ---------- CUERDAS ----------
+     glLineWidth(1.5f);
+    setColor(0.92f, 0.92f, 0.88f);
+    glBegin(GL_LINES);
+    for(int i = 0; i < 4; i++){
+        float xb = -0.09f + i * 0.06f;   // en el puente
+        float xn = -0.06f + i * 0.04f;   // en la cejuela
+        float xm = xb + (xn - xb) * (2.15f / 3.41f);
+
+        glVertex3f(xb, 0.55f, 0.34f);
+        glVertex3f(xm, 2.70f, 0.30f);
+
+        glVertex3f(xm, 2.70f, 0.30f);
+        glVertex3f(xn, 3.96f, 0.15f);
+    }
+    glEnd();
+    glLineWidth(1.0f);
+    glPopMatrix();
+}
+
+// MOCHILA - MIGUEL ROA
+void mochila(float x, float z, float yaw){
+    glPushMatrix();
+    glTranslatef(x, 0.05f, z);
+    glRotatef(yaw, 0, 1, 0);      
+    glRotatef(-5, 1, 0, 0);   
+
+    // ---------- CUERPO ----------
+    box(0, 0.675f, 0, 1.30f, 1.35f, 0.75f,
+        0.45f, 0.28f, 0.65f);
+
+    // Parte superior redondeada
+   cilindroZ(0, 1.30f, 0, 0.65f, 0.75f, 0.45f, 0.28f, 0.65f);
+
+    // Base reforzada (más oscura)
+    box(0, 0.11f, 0, 1.32f, 0.22f, 0.77f,
+        0.25f, 0.15f, 0.40f);
+
+    // ---------- BOLSILLO FRONTAL ----------
+    box(0, 0.55f, 0.485f, 1.00f, 0.80f, 0.22f,
+        0.58f, 0.40f, 0.80f);
+
+    // Cierre del bolsillo
+    box(0, 0.92f, 0.60f, 0.90f, 0.04f, 0.02f,
+        0.95f, 0.80f, 0.25f);
+    sphere(0.38f, 0.90f, 0.61f, 0.05f, 0.95f, 0.80f, 0.25f);
+
+    // ---------- CIERRE PRINCIPAL ----------
+    box(0, 1.45f, 0.385f, 1.00f, 0.03f, 0.02f,
+        0.95f, 0.80f, 0.25f);
+    sphere(0.45f, 1.45f, 0.395f, 0.05f, 0.95f, 0.80f, 0.25f);
+
+    // ---------- ASA SUPERIOR ----------
+   glPushMatrix();
+    glTranslatef(0, 1.95f, 0);
+    setColor(0.25f, 0.15f, 0.40f);
+    glutSolidTorus(0.035, 0.18, 8, 16);
+    glPopMatrix();
+
+    // ---------- BOLSILLO LATERAL CON BOTELLA ----------
+  box(0.69f, 0.32f, 0.05f, 0.10f, 0.55f, 0.50f,
+    0.58f, 0.40f, 0.80f);
+
+   cylinder(0.80f, 0.10f, 0.05f, 0.16f, 0.70f,
+           0.30f, 0.75f, 0.90f);
+
+   cylinder(0.80f, 0.80f, 0.05f, 0.10f, 0.12f,
+          0.10f, 0.10f, 0.12f);
+
+   glPopMatrix();
+}
+
+// ------------------------------------------------------------
 // ESCENA COMPLETA
 // ------------------------------------------------------------
 void room(){
@@ -541,7 +907,9 @@ void room(){
 	gato();
 	glPopMatrix();
 
+	
     mesaNoche();
+    decoracionCama();
     lampara();
     escritorio();
     silla();
@@ -553,11 +921,16 @@ void room(){
     skateboard();
     planta();
     cuadro();
+    librosPiso();
+    lentes();
+    mochila(3.6f, 1.6f, 25.0f); 
+    guitarra(-9.1f, 8.15f, 75.0f);
 }
+
 
 //============================================================
 //RENDERIZADO DE LA ESCENA
-//Configura la c�mara y dibuja todos los objetos.
+//Configura la cámara y dibuja todos los objetos.
 void display(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -580,7 +953,7 @@ void display(){
     glutSwapBuffers();
 }
 
-//AJUSTE DE LA PERSPECTIVA AL CAMBIAR EL TAMA�O DE LA VENTANA
+//AJUSTE DE LA PERSPECTIVA AL CAMBIAR EL TAMAÑO DE LA VENTANA
 void reshape(int w, int h){
     if(h == 0) h = 1;
 
@@ -600,10 +973,15 @@ void reshape(int w, int h){
 }
 
 // CONTROL DEL TECLADO
-// Permite zoom, desplazamiento y reinicio de c�mara.
+// Permite zoom, desplazamiento y reinicio de cámara.
 void keyboard(unsigned char key, int, int){
     if(key == 27)
         exit(0);
+        
+    if(key == ' '){
+        rotSilla += 15.0f;
+        if(rotSilla >= 360.0f) rotSilla -= 360.0f;
+    }
 
     if(key == 'w' || key == 'W')
         zoom -= 0.05f;
@@ -637,7 +1015,7 @@ void keyboard(unsigned char key, int, int){
 }
 
 //CONTROL DE LAS FLECHAS DEL TECLADO
-//Permite rotar y mover la c�mara verticalmente.
+//Permite rotar y mover la cámara verticalmente.
 void special(int key, int, int){
     if(key == GLUT_KEY_LEFT)
         angleY -= 5.0f;
@@ -657,7 +1035,7 @@ void special(int key, int, int){
     glutPostRedisplay();
 }
 
-//REGISTRA LA POSICI�N INICIAL DEL MOUSE
+//REGISTRA LA POSICIÓN INICIAL DEL MOUSE
 void onMouse(int button, int state, int x, int y)
 {
     if(button == GLUT_LEFT_BUTTON &&
@@ -668,7 +1046,7 @@ void onMouse(int button, int state, int x, int y)
     }
 }
 
-//ROTACI�N DEL GATO CON EL MOVIMIENTO DEL MOUSE
+//ROTACIÓN DEL GATO CON EL MOVIMIENTO DEL MOUSE
 void onMotion(int x, int y)
 {
     rotGato += (x - mouseX);
@@ -716,4 +1094,3 @@ int main(int argc, char** argv){
 
     return 0;
 }
-
