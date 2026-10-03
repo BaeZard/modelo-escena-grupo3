@@ -1191,54 +1191,93 @@ void plantaColgante() {
 // ESCENA COMPLETA
 // ------------------------------------------------------------
 void room(){
-	glCallList(listaPiso);  // piso precompilado
+    // Piso - BELEN CHAVEZ
+    glCallList(listaPiso);
+    // Paredes - BELEN CHAVEZ
     paredes();
+    // Puerta - BELEN CHAVEZ
     puerta();
+
+    // Espejo - YESSICA BERNAOLA
     espejo();
+
+    // Ventana - CARLOS ZAMORA
     ventana();
+
+    // Cama - BELEN CHAVEZ
     cama();
-    
-    // Gato sobre la cama
-	glPushMatrix();
-	glTranslatef(5.2f, 2.0f, -2.5f);
-	glRotatef(rotGato, 0.0f, 1.0f, 0.0f);
-	glScalef(1.2f, 1.2f, 1.2f);
-	gato();
-	glPopMatrix();
+    // Gato - BELEN CHAVEZ
+    glPushMatrix();
+    glTranslatef(5.2f, 2.0f, -2.5f);
+    glRotatef(rotGato, 0.0f, 1.0f, 0.0f);
+    glScalef(1.2f, 1.2f, 1.2f);
+    gato();
+    glPopMatrix();
 
+    // Mesa de noche - JHON SIESQUEN
     mesaNoche();
-    decoracionCama();
-    lampara();
-    escritorio();
-    silla();
-    repisa();
-    reloj();
-    alfombra();
-    comoda();
-    pelota();
-    skateboard();
-    planta();
-    cuadro();
-    librosPiso();
-    lentes();
-    mochila(3.6f, 1.6f, 25.0f); 
-    guitarra(-9.1f, 8.15f, 75.0f);
-    
-    // Llamado a los 4 nuevos objetos
-    ventiladorTecho();
-    pcTorre();
-    puff();
-    plantaColgante();
-    
-    // Jhon - Ventilador de pie
-    ventilador();
-    // Jhon - Robot aspiradora
-    robot();
-    // Jhon - Equipo de musica
-    equipoMusica();
-    // Yessica - Lo translúcido siempre al final
-    hazLampara();
 
+    // Decoración cama - MIGUEL ROA
+    decoracionCama();
+
+    // Lámpara - YESSICA BERNAOLA
+    lampara();
+
+    // Escritorio - JHON SIESQUEN
+    escritorio();
+
+    // Silla - MIGUEL ROA
+    silla();
+
+    // Repisa - CARLOS ZAMORA / YESSICA BERNAOLA
+    repisa();
+
+    // Reloj - YESSICA BERNAOLA
+    reloj();
+
+    // Alfombra - BELEN CHAVEZ
+    alfombra();
+    // Cómoda - BELEN CHAVEZ
+    comoda();
+
+    // Pelota - JHON SIESQUEN
+    pelota();
+    // Skateboard - JHON SIESQUEN
+    skateboard();
+
+    // Planta - YESSICA BERNAOLA
+    planta();
+
+    // Cuadro - CARLOS ZAMORA
+    cuadro();
+
+    // Libros del piso - MIGUEL ROA
+    librosPiso();
+    // Lentes - MIGUEL ROA
+    lentes();
+    // Mochila - MIGUEL ROA
+    mochila(3.6f, 1.6f, 25.0f);
+    // Guitarra - MIGUEL ROA
+    guitarra(-9.1f, 8.15f, 75.0f);
+
+    // Ventilador de techo - CARLOS ZAMORA
+    ventiladorTecho();
+    // PC Torre - CARLOS ZAMORA
+    pcTorre();
+    // Puff - CARLOS ZAMORA
+    puff();
+    // Planta colgante - CARLOS ZAMORA
+    plantaColgante();
+
+    // Ventilador de pie - JHON SIESQUEN
+    ventilador();
+    // Robot aspiradora - JHON SIESQUEN
+    robot();
+    // Equipo de música - JHON SIESQUEN
+    equipoMusica();
+
+    // Haz de lámpara - YESSICA BERNAOLA
+    hazLampara();
 }
 
 //CARLOS (TIMER DE ANIMACIÓN: Actualiza las variables a ~60FPS antes de cada cuadro, necesario para la PC y el Ventilador)
