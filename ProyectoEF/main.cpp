@@ -1,6 +1,8 @@
 #include <GL/freeglut.h>
 #include <cmath>
 #include <cstdlib>
+#include <windows.h>
+#include <mmsystem.h>
 
 // ============================================================
 // DORMITORIO 3D 
@@ -21,6 +23,16 @@ float targetX = 0.0f, targetY = 2.0f, targetZ = -1.0f;
 float angleY = 0.0f;
 //Control de zoom
 float zoom = 1.0f;
+
+float anguloAspas = 0.0f;
+float giroCabeza = 0.0f;
+float faseCabeza = 0.0f;
+float robotT = 0.0f;
+float discoAng = 0.0f;
+int fase = 0;
+int ventiladorOn = 1;
+int robotOn = 1;
+int musicaOn = 0;
 
 //Rotación del gato mediante el mouse
 float rotGato = 0.0f;
@@ -522,6 +534,145 @@ void gato()
     glPopMatrix();
 }
 
+// Jhon - Ventilador de pie
+void ventilador(){
+    float x = -6.5f, z = 1.5f;
+
+    cylinder(x, 0.05f, z, 0.95f, 0.25f, 0.22f, 0.22f, 0.25f);
+    cylinder(x, 0.30f, z, 0.16f, 3.10f, 0.72f, 0.72f, 0.75f);
+
+    glPushMatrix();
+    glTranslatef(x, 3.55f, z);
+    glRotatef(giroCabeza, 0, 1, 0);
+
+    setColor(0.30f, 0.32f, 0.38f);
+    glutSolidCylinder(0.38, 0.55, 20, 1);
+
+    glTranslatef(0, 0, 0.55f);
+
+    glPushMatrix();
+    glRotatef(anguloAspas, 0, 0, 1);
+    setColor(0.85f, 0.87f, 0.92f);
+
+    for(int i = 0; i < 4; i++){
+        glPushMatrix();
+        glRotatef(90.0f * i, 0, 0, 1);
+        glTranslatef(0.55f, 0, 0);
+        glScalef(1.1f, 0.45f, 0.06f);
+        glutSolidCube(1.0);
+        glPopMatrix();
+    }
+
+    setColor(0.35f, 0.37f, 0.42f);
+    glutSolidSphere(0.16, 14, 10);
+    glPopMatrix();
+
+    setColor(0.55f, 0.57f, 0.62f);
+    glutSolidTorus(0.05, 1.20, 10, 24);
+
+    glPopMatrix();
+}
+
+// Jhon - Robot aspiradora
+void robot(){
+    float cx = 1.0f, cz = 5.5f, radio = 2.5f;
+
+    float px = cx + radio * cos(robotT);
+    float pz = cz + radio * sin(robotT);
+    float giro = -robotT * 180.0f / 3.14159265f;
+
+    glPushMatrix();
+    glTranslatef(px, 0, pz);
+    glRotatef(giro, 0, 1, 0);
+
+    setColor(0.18f, 0.18f, 0.22f);
+    cylinder(0, 0.05f, 0, 0.85f, 0.30f, 0.18f, 0.18f, 0.22f);
+
+    setColor(0.55f, 0.12f, 0.15f);
+    cylinder(0, 0.35f, 0, 0.78f, 0.12f, 0.55f, 0.12f, 0.15f);
+
+    box(0, 0.50f, 0, 0.55f, 0.16f, 0.35f, 0.25f, 0.25f, 0.30f);
+
+    box(0.80f, 0.20f, 0, 0.10f, 0.22f, 1.10f, 0.35f, 0.35f, 0.40f);
+
+    if(robotOn)
+        sphere(0.45f, 0.46f, 0.30f, 0.09f, 0.20f, 0.95f, 0.30f);
+    else
+        sphere(0.45f, 0.46f, 0.30f, 0.09f, 0.45f, 0.45f, 0.45f);
+
+    glPopMatrix();
+}
+
+// Jhon - Equipo de musica
+void equipoMusica(){
+    float x = -4.6f, z = 6.0f;
+
+    box(x, 1.05f, z, 2.6f, 2.10f, 1.60f, 0.16f, 0.16f, 0.20f);
+    box(x, 2.15f, z, 2.70f, 0.14f, 1.70f, 0.28f, 0.28f, 0.34f);
+
+    glPushMatrix();
+    glTranslatef(x, 1.20f, z + 0.81f);
+
+    setColor(0.10f, 0.10f, 0.12f);
+    glutSolidCylinder(0.45, 0.06, 20, 1);
+
+    glTranslatef(-0.80f, 0.55f, 0);
+    setColor(0.10f, 0.10f, 0.12f);
+    glutSolidCylinder(0.26, 0.06, 16, 1);
+
+    glTranslatef(1.60f, 0, 0);
+    glutSolidCylinder(0.26, 0.06, 16, 1);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(x, 2.24f, z);
+    glRotatef(discoAng, 0, 1, 0);
+
+    setColor(0.08f, 0.08f, 0.10f);
+    cylinder(0, 0, 0, 0.62f, 0.06f, 0.08f, 0.08f, 0.10f);
+
+    setColor(0.85f, 0.20f, 0.20f);
+    cylinder(0, 0.06f, 0, 0.18f, 0.03f, 0.85f, 0.20f, 0.20f);
+
+    box(0.40f, 0.09f, 0, 0.30f, 0.03f, 0.06f, 0.95f, 0.95f, 0.95f);
+    glPopMatrix();
+
+    if(musicaOn){
+        for(int i = 0; i < 3; i++){
+            float br = ((fase / 5 + i) % 3 == 0) ? 1.0f : 0.25f;
+            sphere(x - 0.6f + i * 0.6f, 1.95f, z + 0.85f, 0.10f,
+                   br, br * 0.45f, 0.10f);
+        }
+    }
+    else{
+        for(int i = 0; i < 3; i++)
+            sphere(x - 0.6f + i * 0.6f, 1.95f, z + 0.85f, 0.10f,
+                   0.30f, 0.30f, 0.32f);
+    }
+}
+
+void animar(int valor){
+    if(ventiladorOn){
+        anguloAspas += 20.0f;
+        if(anguloAspas > 360.0f) anguloAspas -= 360.0f;
+
+        faseCabeza += 0.02f;
+        giroCabeza = 40.0f * sin(faseCabeza);
+    }
+
+    if(robotOn)
+        robotT += 0.012f;
+
+    if(musicaOn){
+        discoAng += 6.0f;
+        if(discoAng > 360.0f) discoAng -= 360.0f;
+        fase++;
+    }
+
+    glutPostRedisplay();
+    glutTimerFunc(30, animar, 0);
+}
+
 // ------------------------------------------------------------
 // ESCENA COMPLETA
 // ------------------------------------------------------------
@@ -553,6 +704,14 @@ void room(){
     skateboard();
     planta();
     cuadro();
+    // Jhon - Ventilador de pie
+    ventilador();
+
+    // Jhon - Robot aspiradora
+    robot();
+
+    // Jhon - Equipo de musica
+    equipoMusica();
 }
 
 //============================================================
@@ -633,6 +792,21 @@ void keyboard(unsigned char key, int, int){
     if(zoom < 0.55f) zoom = 0.55f;
     if(zoom > 1.8f) zoom = 1.8f;
 
+    if(key == 'v' || key == 'V')
+        ventiladorOn = !ventiladorOn;
+
+    if(key == 'b' || key == 'B')
+        robotOn = !robotOn;
+
+    if(key == 'm' || key == 'M'){
+        musicaOn = !musicaOn;
+
+        if(musicaOn)
+            PlaySound("musica.wav", NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+        else
+            PlaySound(NULL, NULL, 0);
+    }
+
     glutPostRedisplay();
 }
 
@@ -711,6 +885,7 @@ int main(int argc, char** argv){
     //Funciones para movimiento con mouse
     glutMouseFunc(onMouse);
 	glutMotionFunc(onMotion);
+    glutTimerFunc(30, animar, 0);
 
     glutMainLoop();
 
