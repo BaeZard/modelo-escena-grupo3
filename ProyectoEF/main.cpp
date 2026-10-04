@@ -16,7 +16,7 @@
 // ESC                      = salir
 // ============================================================
 
-//PosiciÃ³n de la cÃ¡mara en el espacio 3D
+//Posicion de la camara en el espacio 3D
 float camX = 18.0f, camY = 14.0f, camZ = 20.0f;
 float targetX = 0.0f, targetY = 2.0f, targetZ = -1.0f;
 
@@ -48,22 +48,22 @@ void setColor(float r, float g, float b){
 }
 
 
-//Rotación del gato mediante el mouse
+//Rotacion del gato mediante el mouse
 float rotGato = 0.0f;
 
-//Posición anterior del mouse
+//Posicion anterior del mouse
 int mouseX, mouseY;
 int botonMouse = -1;
 
 float rotSilla = 0.0f;
 
-//CARLOS (VARIABLES DE ANIMACIÓN: Controlan el giro del ventilador de techo y el pulso luminoso del PC)
+//CARLOS (VARIABLES DE ANIMACION: Controlan el giro del ventilador de techo y el pulso luminoso del PC)
 float rotVentilador = 0.0f;
 float luzPC = 0.0f;
 bool luzAumenta = true;
 
 // ============================================================
-// FUNCIÃN PARA CREAR CAJAS 3D
+// FUNCION PARA CREAR CAJAS 3D
 // Se utiliza para paredes, muebles, cama, puerta, etc.
 // ============================================================
 void box(float x, float y, float z, float sx, float sy, float sz,
@@ -77,7 +77,7 @@ void box(float x, float y, float z, float sx, float sy, float sz,
 }
 
 // ============================================================
-// FUNCIÃN PARA CREAR ESFERAS
+// FUNCION PARA CREAR ESFERAS
 // Se utiliza para pelotas, adornos y detalles decorativos.
 // ============================================================
 void cylinder(float x, float y, float z, float radius, float height,
@@ -98,7 +98,7 @@ void cylinder(float x, float y, float z, float radius, float height,
 }
 
 // ============================================================
-// FUNCIÃN PARA CREAR ESFERAS
+// FUNCION PARA CREAR ESFERAS
 // Se utiliza para pelotas, adornos y detalles decorativos.
 // ============================================================
 void sphere(float x, float y, float z, float radius,
@@ -243,7 +243,7 @@ void almohada(float x, float z, float r, float g, float b){
         glPopMatrix();
     }
 
-    // Botón central
+    // Boton central
     sphere(0, 0.40f, 0, 0.07f, 0.98f, 0.92f, 0.70f);
 
     glPopMatrix();
@@ -255,11 +255,11 @@ void cama(){
     box(5.2f, 0.45f, -3.8f, 7.2f, 0.9f, 8.8f,
         0.34f, 0.16f, 0.08f);
 
-    // ColchÃ³n
+    // Colchon
     box(5.2f, 1.05f, -3.8f, 6.9f, 0.75f, 8.5f,
         0.95f, 0.38f, 0.42f);
 
-    // SÃ¡bana
+    // Sabana
     box(5.2f, 1.48f, -3.0f, 6.5f, 0.18f, 5.8f,
         0.94f, 0.45f, 0.48f);
 
@@ -314,11 +314,11 @@ void lampara(){
 
 }
 
-// Haz de luz translúcido: se dibuja AL FINAL de la escena - yessica
+// Haz de luz translucido: se dibuja AL FINAL de la escena - yessica
 void hazLampara(){
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glDepthMask(GL_FALSE);      // no tapa lo que está detrás
+    glDepthMask(GL_FALSE);      // no tapa lo que esta detras
     glDisable(GL_LIGHTING);
 
     glPushMatrix();
@@ -494,7 +494,7 @@ void reloj(){
         glPopMatrix();
     }
 
-    // Manecillas (líneas: sin iluminación porque no tienen normales)
+    // Manecillas (líneas: sin iluminacion porque no tienen normales)
     glDisable(GL_LIGHTING);
     setColor(0.0f, 0.0f, 0.0f);
     glLineWidth(3);
@@ -531,7 +531,7 @@ void alfombra(){
 
 
 // ------------------------------------------------------------
-// CÃMODA (AHORA ENTRA PERFECTAMENTE EN LA PARED AMPLIADA) - BELEN CHAVEZ
+// COMODA (AHORA ENTRA PERFECTAMENTE EN LA PARED AMPLIADA) - BELEN CHAVEZ
 void comoda(){
     box(-8.60f, 1.35f, 5.2f, 2.4f, 2.7f, 4.0f,
         0.48f, 0.22f, 0.10f);
@@ -1104,7 +1104,7 @@ void mochila(float x, float z, float yaw){
 }
 
 // ------------------------------------------------------------
-// NUEVOS OBJETOS AÑADIDOS
+// NUEVOS OBJETOS A�ADIDOS
 // ------------------------------------------------------------
 
 //CARLOS (VENTILADOR DE TECHO: Gira sobre su eje vertical constantemente usando rotVentilador para dar movimiento fluido a la habitación)
@@ -1130,7 +1130,7 @@ void ventiladorTecho() {
     glPopMatrix();
 }
 
-//CARLOS (PC TORRE: Gabinete bajo el escritorio con luz LED frontal que parpadea rítmicamente utilizando luzPC)
+//CARLOS (PC TORRE: Gabinete bajo el escritorio con luz LED frontal que parpadea armonicamente utilizando luzPC)
 void pcTorre() {
     glPushMatrix();
     glTranslatef(-4.9f, 0.9f, -6.5f); 
@@ -1148,7 +1148,7 @@ void pcTorre() {
     glPopMatrix();
 }
 
-//CARLOS (PUFF: Asiento cilíndrico bajo ubicado en la esquina derecha libre, aportando comodidad sin obstruir los libros del piso)
+//CARLOS (PUFF: Asiento cilindrico bajo ubicado en la esquina derecha libre, aportando comodidad sin obstruir los libros del piso)
 void puff() {
     glPushMatrix();
     glTranslatef(7.5f, 0.4f, 6.5f); 
@@ -1156,7 +1156,7 @@ void puff() {
     // Base 
     cylinder(0.0f, -0.4f, 0.0f, 1.0f, 0.8f, 0.65f, 0.25f, 0.25f);
     
-    // Cojín esférico escalado
+    // Cojin esferico escalado
     glPushMatrix();
     glTranslatef(0.0f, 0.4f, 0.0f);
     glScalef(1.0f, 0.3f, 1.0f);
@@ -1167,7 +1167,7 @@ void puff() {
     glPopMatrix();
 }
 
-//CARLOS (PLANTA COLGANTE: Maceta fijada en la pared izquierda sobre la cómoda, aprovechando el espacio vertical vacío con esferas decorativas)
+//CARLOS (PLANTA COLGANTE: Maceta fijada en la pared izquierda sobre la comoda, aprovechando el espacio vertical vacio con esferas decorativas)
 void plantaColgante() {
     glPushMatrix();
     glTranslatef(-9.5f, 6.5f, 5.2f);
@@ -1179,7 +1179,7 @@ void plantaColgante() {
     glutSolidCone(0.5f, 0.6f, 16, 16);
     glPopMatrix();
     
-    // Hojas colgantes formadas por esferas asimétricas
+    // Hojas colgantes formadas por esferas asimetricas
     sphere( 0.0f,  0.1f,  0.0f, 0.45f, 0.2f, 0.6f, 0.2f); 
     sphere( 0.3f, -0.3f,  0.2f, 0.30f, 0.15f, 0.55f, 0.15f);
     sphere(-0.2f, -0.5f,  0.3f, 0.25f, 0.18f, 0.50f, 0.18f);
@@ -1237,7 +1237,7 @@ void room(){
 
     // Alfombra - BELEN CHAVEZ
     alfombra();
-    // Cómoda - BELEN CHAVEZ
+    // Comoda - BELEN CHAVEZ
     comoda();
 
     // Pelota - JHON SIESQUEN
@@ -1280,7 +1280,7 @@ void room(){
     hazLampara();
 }
 
-//CARLOS (TIMER DE ANIMACIÓN: Actualiza las variables a ~60FPS antes de cada cuadro, necesario para la PC y el Ventilador)
+//CARLOS (TIMER DE ANIMACION: Actualiza las variables a ~60FPS antes de cada cuadro, necesario para la PC y el Ventilador)
 void timer(int value) {
     rotVentilador += 1.8f;
     if(rotVentilador > 360.0f) rotVentilador -= 360.0f;
@@ -1338,7 +1338,7 @@ void hud(){
 
 //============================================================
 //RENDERIZADO DE LA ESCENA
-//Configura la cÃ¡mara y dibuja todos los objetos.
+//Configura la camara y dibuja todos los objetos.
 void display(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -1356,7 +1356,7 @@ void display(){
         0, 1, 0
     );
 
-    // Luces (después de gluLookAt: quedan fijas en el cuarto) - Yessica
+    // Luces (despues de gluLookAt: quedan fijas en el cuarto) - Yessica
     GLfloat posLuz0[] = { -5.0f, 15.0f, 10.0f, 1.0f };   // luz general
     glLightfv(GL_LIGHT0, GL_POSITION, posLuz0);
 
@@ -1369,14 +1369,14 @@ void display(){
     glutSwapBuffers();
 }
 
-//AJUSTE DE LA PERSPECTIVA AL CAMBIAR EL TAMAÃO DE LA VENTANA
+//AJUSTE DE LA PERSPECTIVA AL CAMBIAR EL TAMA�O DE LA VENTANA
 // ------------------------------------------------------------
 // RESHAPE 
 // ------------------------------------------------------------
 void reshape(int w, int h){
-    if (h == 0) h = 1; // Evita divisiÃ³n entre cero
+    if (h == 0) h = 1; // Evita division entre cero
 
-    // 1. El Ã¡rea de dibujo ocupa todo el tamaÃ±o de la ventana
+    // 1. El Area de dibujo ocupa todo el tama�o de la ventana
     glViewport(0, 0, w, h);
 
     glMatrixMode(GL_PROJECTION);
@@ -1384,7 +1384,7 @@ void reshape(int w, int h){
 
     // 2. ASPECTO FIJO (1.0): 
     // Al mantenerlo fijo y no usar (double)w / (double)h, 
-    // la imagen se deformarÃ¡/estirarÃ¡ al ritmo que muevas el mouse.
+    // la imagen se deforma/estira al ritmo que muevas el mouse.
     gluPerspective(55.0, 1.2, 0.1, 100.0);
 
     glMatrixMode(GL_MODELVIEW);
@@ -1392,7 +1392,7 @@ void reshape(int w, int h){
 }
 
 // CONTROL DEL TECLADO
-// Permite zoom, desplazamiento y reinicio de cÃ¡mara.
+// Permite zoom, desplazamiento y reinicio de camara.
 void keyboard(unsigned char key, int, int){
     if(key == 27)
         exit(0);
@@ -1449,7 +1449,7 @@ void keyboard(unsigned char key, int, int){
 }
 
 //CONTROL DE LAS FLECHAS DEL TECLADO
-//Permite rotar y mover la cÃ¡mara verticalmente.
+//Permite rotar y mover la camara verticalmente.
 void special(int key, int, int){
     if(key == GLUT_KEY_LEFT)
         angleY -= 5.0f;
@@ -1469,7 +1469,7 @@ void special(int key, int, int){
     glutPostRedisplay();
 }
 
-//REGISTRA LA POSICIÃN INICIAL DEL MOUSE
+//REGISTRA LA POSICION INICIAL DEL MOUSE
 void onMouse(int button, int state, int x, int y)
 {
     if(state == GLUT_DOWN){
@@ -1483,7 +1483,7 @@ void onMouse(int button, int state, int x, int y)
     }
 }
 
-//ROTACIÃN DEL GATO CON EL MOVIMIENTO DEL MOUSE
+//ROTACION DEL GATO CON EL MOVIMIENTO DEL MOUSE
 void onMotion(int x, int y)
 {
     int dx = x - mouseX;
@@ -1493,7 +1493,7 @@ void onMotion(int x, int y)
         rotGato += dx;                       // gira el gato
     }
     else if(botonMouse == GLUT_RIGHT_BUTTON){
-        angleY += dx * 0.4f;                 // gira la cámara
+        angleY += dx * 0.4f;                 // gira la camara
         camY += dy * 0.05f;
         if(camY < 5.0f)  camY = 5.0f;
         if(camY > 25.0f) camY = 25.0f;
@@ -1518,7 +1518,7 @@ void onWheel(int, int dir, int, int){
 }
 
 // ------------------------------------------------------------
-// INICIALIZACIÓN - YESSICA
+// INICIALIZACION - YESSICA
 // ------------------------------------------------------------
 void init(){
     glEnable(GL_DEPTH_TEST);
@@ -1529,7 +1529,7 @@ void init(){
     quad = gluNewQuadric();
     gluQuadricNormals(quad, GLU_SMOOTH);
 
-    // Iluminación
+    // Iluminacion
     glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
@@ -1545,7 +1545,7 @@ void init(){
     glLightfv(GL_LIGHT0, GL_DIFFUSE, difusa0);
     glLightfv(GL_LIGHT0, GL_AMBIENT, ambiente0);
 
-    // Luz 1: foco de la lámpara (cálida, con atenuación)
+    // Luz 1: foco de la lampara (calida, con atenuacion)
     GLfloat difusa1[] = { 0.90f, 0.70f, 0.35f, 1.0f };
     glEnable(GL_LIGHT1);
     glLightfv(GL_LIGHT1, GL_DIFFUSE, difusa1);
@@ -1596,7 +1596,7 @@ int main(int argc, char** argv){
     //Funcion del Zoom
     glutMouseWheelFunc(onWheel);
     
-    // Inicia el bucle de animación
+    // Inicia el bucle de animacion
     glutTimerFunc(16, timer, 0);
     glutTimerFunc(30, animar, 0);
     
